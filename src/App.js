@@ -10,7 +10,7 @@ import Layout from "./components/Layout";
 import routes from "./routes";
 
 function App() {
-  let loggedIn = false;
+  let loggedIn = true;
 
   return (
     <div className="App">
@@ -30,7 +30,6 @@ function App() {
                   />
                 );
               } else {
-                console.log(":ssssssssssssssss")
                 return (
                   <Route
                     exact={exact}

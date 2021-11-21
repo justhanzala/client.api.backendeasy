@@ -104,7 +104,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                   color="inherit"
                   noWrap
                   sx={{ flexGrow: 1 }}
-                  style={{ textAlign: "left" }}
+                  className="text-start"
                 >
                   {title}
                 </Typography>

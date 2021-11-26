@@ -2,6 +2,11 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import { useSelector } from "react-redux";
+import {
+  LinearProgress,
+  Box
+} from "@mui/material";
 
 // components
 import Layout from "./components/Layout";
@@ -10,10 +15,19 @@ import Layout from "./components/Layout";
 import routes from "./routes";
 
 function App() {
+  const {
+    site: { loading, message },
+  } = useSelector((state) => state);
+
   let loggedIn = true;
 
   return (
     <div className="App">
+      {loading && (
+        <Box zIndex={9999} position="fixed" top={0} width="100%">
+          <LinearProgress color="secondary" />
+        </Box>
+      )}
       <Router>
         <Layout routes={routes} loggedIn={loggedIn}>
           <Switch>

@@ -18,6 +18,8 @@ import InputLabel from "@mui/material/InputLabel";
 
 // Actions
 import { signup as signupAction } from "../redux/user/actions";
+import { useLocation, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Components
 import Copyright from "../components/Copyright";
@@ -27,11 +29,15 @@ const theme = createTheme();
 export default function SignUp() {
   const [role, setRole] = React.useState("");
   const dispatch = useDispatch();
+  const location = useLocation();
+  const {
+    user: { loggedIn },
+  } = useSelector((state) => state);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const userSignupData = {
+    const signupData = {
       name: data.get("name"),
       role: parseInt(role),
       email: data.get("email"),
@@ -39,8 +45,10 @@ export default function SignUp() {
       password: data.get("password"),
     };
 
-    dispatch(signupAction({ signupData: userSignupData }));
+    dispatch(signupAction({ signupData }));
   };
+
+  if (loggedIn) return <Redirect to={location?.state?.from} />;
 
   return (
     <ThemeProvider theme={theme}>

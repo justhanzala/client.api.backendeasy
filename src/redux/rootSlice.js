@@ -1,5 +1,7 @@
-import site from "./site/site";
+import siteSlice from "./site/slice";
+import userSlice from "./user/slice";
 
 export const reducers = {
-  site: site.reducer,
+  site: siteSlice.reducer,
+  user: userSlice.reducer,
 };

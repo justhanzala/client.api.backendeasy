@@ -3,10 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { useSelector } from "react-redux";
-import {
-  LinearProgress,
-  Box
-} from "@mui/material";
+import { LinearProgress, Box } from "@mui/material";
 
 // components
 import Layout from "./components/Layout";
@@ -16,10 +13,9 @@ import routes from "./routes";
 
 function App() {
   const {
-    site: { loading, message },
+    site: { loading },
+    user: { loggedIn },
   } = useSelector((state) => state);
-
-  let loggedIn = true;
 
   return (
     <div className="App">

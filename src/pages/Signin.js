@@ -9,6 +9,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { signin as signinAction } from "../redux/user/actions";
+import { useDispatch } from "react-redux";
+import { useLocation, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Components
 import Copyright from "../components/Copyright";
@@ -16,16 +20,25 @@ import Copyright from "../components/Copyright";
 const theme = createTheme();
 
 export default function SignIn() {
-  console.log('ssssssssssss3333')
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const {
+    user: { loggedIn },
+  } = useSelector((state) => state);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+
+    const signinData = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+
+    dispatch(signinAction({ signinData }));
   };
+
+  if (loggedIn) return <Redirect to={location?.state?.from} />;
 
   return (
     <ThemeProvider theme={theme}>

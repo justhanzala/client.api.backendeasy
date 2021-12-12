@@ -10,6 +10,14 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+
+// Actions
+import { signup as signupAction } from "../redux/user/actions";
 
 // Components
 import Copyright from "../components/Copyright";
@@ -17,14 +25,21 @@ import Copyright from "../components/Copyright";
 const theme = createTheme();
 
 export default function SignUp() {
+  const [role, setRole] = React.useState("");
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+    const userSignupData = {
+      name: data.get("name"),
+      role: parseInt(role),
       email: data.get("email"),
+      phoneNumber: data.get("phoneNumber"),
       password: data.get("password"),
-    });
+    };
+
+    dispatch(signupAction({ signupData: userSignupData }));
   };
 
   return (
@@ -55,23 +70,30 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Name"
                   autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
+                <FormControl fullWidth required>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Role
+                  </InputLabel>
+                  <Select
+                    label="Role"
+                    name="role"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <MenuItem value={0}>individual</MenuItem>
+                    <MenuItem value={1}>company</MenuItem>
+                    <MenuItem value={2}>other</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -81,6 +103,16 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="phoneNumber"
+                  label="Phone Number"
+                  name="phoneNumber"
+                  autoComplete="phoneNumber"
                 />
               </Grid>
               <Grid item xs={12}>

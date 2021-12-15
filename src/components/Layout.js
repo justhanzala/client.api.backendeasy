@@ -1,19 +1,23 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import {
+  AppBar as MuiAppBar,
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+  CssBaseline,
+  Drawer as MuiDrawer,
+  Toolbar,
+  List,
+  IconButton,
+  Menu as MenuIcon,
+} from "@mui/material";
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ArrowDropDown as ArrowDropDownIcon,
+} from "@mui/icons-material";
 import SidebarItem from "./SidebarItem";
 import { useLocation } from "react-router-dom";
 
@@ -108,7 +112,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                   {title}
                 </Typography>
                 <IconButton color="inherit">
-                    <ArrowDropDownIcon />
+                  <ArrowDropDownIcon />
                 </IconButton>
               </Toolbar>
             </AppBar>
@@ -121,7 +125,10 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                   px: [1],
                 }}
               >
-                <IconButton onClick={toggleDrawer}>
+                <IconButton
+                  onClick={toggleDrawer}
+                  sx={{ display: "flex", flexDirection: "column" }}
+                >
                   <ChevronLeftIcon />
                 </IconButton>
               </Toolbar>

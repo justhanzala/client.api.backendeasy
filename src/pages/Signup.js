@@ -1,32 +1,34 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+
+// Material UI Modules
+import {
+  Avatar,
+  Button,
+  Box,
+  CssBaseline,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+  MenuItem,
+  Link,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
+
+// Material UI Icons
+import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
 
 // Actions
 import { signup as signupAction } from "../redux/user/actions";
 import { useLocation, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Components
 import Copyright from "../components/Copyright";
 
 const theme = createTheme();
 
-export default function SignUp() {
+const SignUp = () => {
   const [role, setRole] = React.useState("");
   const dispatch = useDispatch();
   const location = useLocation();
@@ -49,6 +51,21 @@ export default function SignUp() {
   };
 
   if (loggedIn) return <Redirect to={location?.state?.from} />;
+
+  let roles = [
+    {
+      id: 1,
+      value: "Individual",
+    },
+    {
+      id: 2,
+      value: "Company",
+    },
+    {
+      id: 3,
+      value: "Other",
+    },
+  ];
 
   return (
     <ThemeProvider theme={theme}>
@@ -87,21 +104,22 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth required>
-                  <InputLabel id="demo-simple-select-autowidth-label">
-                    Role
-                  </InputLabel>
-                  <Select
-                    label="Role"
-                    name="role"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                  >
-                    <MenuItem value={0}>individual</MenuItem>
-                    <MenuItem value={1}>company</MenuItem>
-                    <MenuItem value={2}>other</MenuItem>
-                  </Select>
-                </FormControl>
+                <TextField
+                  select
+                  label="Role"
+                  name="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  variant="outlined"
+                  fullWidth
+                  required
+                >
+                  {roles.map((role) => (
+                    <MenuItem key={role.id} value={role.value}>
+                      {role.value}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -156,4 +174,6 @@ export default function SignUp() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignUp;

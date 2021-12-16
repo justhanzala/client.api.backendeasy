@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   AppBar as MuiAppBar,
+  Avatar,
   Box,
   Container,
   Divider,
@@ -12,7 +13,8 @@ import {
   Toolbar,
   List,
   IconButton,
-  Menu as MenuIcon,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -20,6 +22,12 @@ import {
 } from "@mui/icons-material";
 import SidebarItem from "./SidebarItem";
 import { useLocation } from "react-router-dom";
+
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Tooltip from "@mui/material/Tooltip";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -77,6 +85,15 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
     setOpen(!open);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open1 = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -99,7 +116,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                     ...(open && { display: "none" }),
                   }}
                 >
-                  <MenuIcon />
+                  <Menu />
                 </IconButton>
                 <Typography
                   component="h1"
@@ -111,9 +128,11 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                 >
                   {title}
                 </Typography>
-                <IconButton color="inherit">
-                  <ArrowDropDownIcon />
-                </IconButton>
+                <Tooltip title="My Profile">
+                  <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                    <Avatar>M</Avatar>
+                  </IconButton>
+                </Tooltip>
               </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
@@ -161,6 +180,67 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
           </Container>
         </Box>
       </Box>
+      {/* Profile Dropwdown */}
+      <Menu
+        anchorEl={anchorEl}
+        open={open1}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            mt: 1.5,
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        <MenuItem>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
     </ThemeProvider>
   );
 };

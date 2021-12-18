@@ -1,25 +1,31 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+
+// Material UI Modules
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { signin as signinAction } from "../redux/user/actions";
-import { useDispatch } from "react-redux";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  Container,
+  TextField,
+  Link,
+  Box,
+  Typography,
+} from "@mui/material";
+
+// Material UI Modules
+import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
+
 import { useLocation, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+
+// Actions
+import { signin as signinAction } from "../redux/user/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Copyright from "../components/Copyright";
 
-const theme = createTheme();
-
-export default function SignIn() {
+const SignIn = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const {
@@ -39,6 +45,8 @@ export default function SignIn() {
   };
 
   if (loggedIn) return <Redirect to={location?.state?.from} />;
+
+  const theme = createTheme();
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,30 +73,30 @@ export default function SignIn() {
             sx={{ mt: 1 }}
           >
             <TextField
+              id="email"
+              name="email"
               margin="normal"
               required
               fullWidth
-              id="email"
               label="Email Address"
-              name="email"
               autoComplete="email"
               autoFocus
             />
             <TextField
+              id="password"
+              name="password"
+              type="password"
+              label="Password"
               margin="normal"
+              autoComplete="current-password"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
             />
             <Button
               type="submit"
-              fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              fullWidth
             >
               Sign In
             </Button>
@@ -97,7 +105,7 @@ export default function SignIn() {
                 Forgot password?
               </Link> */}
               <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Don't have an account? Sign Up
               </Link>
             </Box>
           </Box>
@@ -106,4 +114,6 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignIn;

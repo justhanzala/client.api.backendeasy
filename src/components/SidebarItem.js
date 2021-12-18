@@ -1,11 +1,14 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 
-// Material Ui Modules
+// Material UI Modules
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
-// Material Ui Icons
-import DashboardIcon from "@mui/icons-material/Dashboard";
+// Material UI Icons
+import {
+  Dashboard as DashboardIcon,
+  Api as ApiIcon,
+} from "@mui/icons-material";
 
 const SidebarItem = () => {
   const history = useHistory();
@@ -14,24 +17,26 @@ const SidebarItem = () => {
     {
       icon: <DashboardIcon />,
       title: "Dashboard",
+      path: "/dashboard",
       click: () => history.push("/dashboard"),
     },
     {
-      icon: <DashboardIcon />,
+      icon: <ApiIcon />,
       title: "API Services",
+      path: "/api-services",
       click: () => history.push("/api-services"),
     },
   ];
 
   return (
-    <div>
+    <>
       {menus.map(({ icon, title, click }, i) => (
         <ListItem key={i} button onClick={click}>
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText primary={title} />
         </ListItem>
       ))}
-    </div>
+    </>
   );
 };
 

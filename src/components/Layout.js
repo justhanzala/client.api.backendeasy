@@ -1,21 +1,30 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import {
+  AppBar as MuiAppBar,
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+  CssBaseline,
+  Drawer as MuiDrawer,
+  Toolbar,
+  List,
+  IconButton,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 import SidebarItem from "./SidebarItem";
 import { useLocation } from "react-router-dom";
+
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Tooltip from "@mui/material/Tooltip";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -73,6 +82,15 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
     setOpen(!open);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open1 = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -95,7 +113,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                     ...(open && { display: "none" }),
                   }}
                 >
-                  <MenuIcon />
+                  <Menu />
                 </IconButton>
                 <Typography
                   component="h1"
@@ -107,9 +125,11 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                 >
                   {title}
                 </Typography>
-                <IconButton color="inherit">
-                    <ArrowDropDownIcon />
-                </IconButton>
+                <Tooltip title="My Profile">
+                  <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                    <Avatar>M</Avatar>
+                  </IconButton>
+                </Tooltip>
               </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
@@ -121,7 +141,10 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                   px: [1],
                 }}
               >
-                <IconButton onClick={toggleDrawer}>
+                <IconButton
+                  onClick={toggleDrawer}
+                  sx={{ display: "flex", flexDirection: "column" }}
+                >
                   <ChevronLeftIcon />
                 </IconButton>
               </Toolbar>
@@ -154,6 +177,67 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
           </Container>
         </Box>
       </Box>
+      {/* Profile Dropwdown */}
+      <Menu
+        anchorEl={anchorEl}
+        open={open1}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            mt: 1.5,
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        <MenuItem>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
     </ThemeProvider>
   );
 };

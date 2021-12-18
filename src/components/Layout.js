@@ -16,10 +16,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import {
-  ChevronLeft as ChevronLeftIcon,
-  ArrowDropDown as ArrowDropDownIcon,
-} from "@mui/icons-material";
+import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 import SidebarItem from "./SidebarItem";
 import { useLocation } from "react-router-dom";
 

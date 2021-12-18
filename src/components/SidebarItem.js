@@ -1,8 +1,11 @@
 import * as React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 // Material UI Modules
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+
+// Material UI Colors
+import { grey } from "@mui/material/colors";
 
 // Material UI Icons
 import {
@@ -12,8 +15,9 @@ import {
 
 const SidebarItem = () => {
   const history = useHistory();
+  const location = useLocation();
 
-  const menus = [
+  const Menus = [
     {
       icon: <DashboardIcon />,
       title: "Dashboard",
@@ -30,8 +34,12 @@ const SidebarItem = () => {
 
   return (
     <>
-      {menus.map(({ icon, title, click }, i) => (
-        <ListItem key={i} button onClick={click}>
+      {Menus.map(({ icon, title, path, click }, i) => (
+        <ListItem
+          button
+          onClick={click}
+          sx={{ bgcolor: location.pathname === path ? grey[100] : "white" }}
+        >
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText primary={title} />
         </ListItem>

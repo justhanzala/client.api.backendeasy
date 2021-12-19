@@ -30,7 +30,7 @@ axios.interceptors.response.use(
 
     dispatch(siteSlice.actions.setApiLoading(false));
     dispatch(
-      siteSlice.actions.setMessage({ text: message, variant: "success" })
+      siteSlice.actions.setMessage({ text: message.text, variant: "success" })
     );
 
     return response;
@@ -40,7 +40,7 @@ axios.interceptors.response.use(
     dispatch(siteSlice.actions.setMessage({ text: "", variant: "" }));
     dispatch(siteSlice.actions.setApiLoading(false));
     dispatch(
-      siteSlice.actions.setMessage({ text: error.message, variant: "error" })
+      siteSlice.actions.setMessage({ text: error.message.text, variant: "error" })
     );
 
     Promise.reject(error);

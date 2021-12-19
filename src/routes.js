@@ -1,6 +1,7 @@
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import ApiServices from "./pages/ApiServices";
 
 const routes = [
   {
@@ -23,7 +24,14 @@ const routes = [
     auth: true,
     path: "/dashboard",
     component: Dashboard,
-    title: "Dashboard"
+    title: "Dashboard",
+  },
+  {
+    exact: true,
+    auth: true,
+    path: "/api-services",
+    component: ApiServices,
+    title: "Api Services",
   },
 ];
 

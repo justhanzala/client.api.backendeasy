@@ -15,16 +15,18 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  ListItemIcon,
+  Tooltip,
 } from "@mui/material";
-import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  PersonAdd,
+  Settings,
+  Logout,
+} from "@mui/icons-material";
 import SidebarItem from "./SidebarItem";
 import { useLocation } from "react-router-dom";
-
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -84,11 +86,18 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const LogoutAction = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
   };
 
   return (
@@ -145,15 +154,17 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                   onClick={toggleDrawer}
                   sx={{ display: "flex", flexDirection: "column" }}
                 >
-                  <ChevronLeftIcon />
+                  {open ? (
+                    <ChevronLeftIcon sx={{ color: "black" }} />
+                  ) : (
+                    <ChevronRightIcon sx={{ color: "black" }} />
+                  )}
                 </IconButton>
               </Toolbar>
               <Divider />
               <List>
                 <SidebarItem />
               </List>
-              {/* <Divider />
-          <List>{secondaryListItems}</List> */}
             </Drawer>
           </>
         )}
@@ -170,11 +181,11 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Box sx={{ mx: 6, mt: 6, mb: 4 }}>
             <Grid container spacing={3}>
               {children}
             </Grid>
-          </Container>
+          </Box>
         </Box>
       </Box>
       {/* Profile Dropwdown */}
@@ -231,7 +242,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={LogoutAction}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

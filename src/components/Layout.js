@@ -4,7 +4,6 @@ import {
   AppBar as MuiAppBar,
   Avatar,
   Box,
-  Container,
   Divider,
   Grid,
   Typography,
@@ -122,7 +121,11 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                     ...(open && { display: "none" }),
                   }}
                 >
-                  <Menu />
+                  {open ? (
+                    <ChevronLeftIcon sx={{ color: "white" }} />
+                  ) : (
+                    <ChevronRightIcon sx={{ color: "white" }} />
+                  )}
                 </IconButton>
                 <Typography
                   component="h1"
@@ -154,11 +157,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                   onClick={toggleDrawer}
                   sx={{ display: "flex", flexDirection: "column" }}
                 >
-                  {open ? (
-                    <ChevronLeftIcon sx={{ color: "black" }} />
-                  ) : (
-                    <ChevronRightIcon sx={{ color: "black" }} />
-                  )}
+                  <ChevronLeftIcon sx={{ color: "black" }} />
                 </IconButton>
               </Toolbar>
               <Divider />

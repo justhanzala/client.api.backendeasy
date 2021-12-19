@@ -36,6 +36,7 @@ const SidebarItem = () => {
     <>
       {Menus.map(({ icon, title, path, click }, i) => (
         <ListItem
+          key={i}
           button
           onClick={click}
           sx={{ bgcolor: location.pathname === path ? grey[100] : "white" }}

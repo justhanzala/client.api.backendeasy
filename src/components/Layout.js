@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useLocation } from "react-router-dom";
+
+// Styled Modules
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   AppBar as MuiAppBar,
@@ -24,11 +27,11 @@ import {
   Settings,
   Logout,
 } from "@mui/icons-material";
+
+// Components
 import SidebarItem from "./SidebarItem";
-import { useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -75,7 +78,7 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-const DashboardContent = ({ children, routes, loggedIn }) => {
+const DashboardContent = ({ children, routes, loggedIn, userData }) => {
   const { pathname } = useLocation();
   const { title } = routes.find((route) => route.path === pathname) || {};
   const [open, setOpen] = React.useState(true);
@@ -121,11 +124,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                     ...(open && { display: "none" }),
                   }}
                 >
-                  {open ? (
-                    <ChevronLeftIcon sx={{ color: "white" }} />
-                  ) : (
-                    <ChevronRightIcon sx={{ color: "white" }} />
-                  )}
+                  <ChevronRightIcon sx={{ color: "white" }} />
                 </IconButton>
                 <Typography
                   component="h1"
@@ -139,7 +138,7 @@ const DashboardContent = ({ children, routes, loggedIn }) => {
                 </Typography>
                 <Tooltip title="My Profile">
                   <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                    <Avatar>M</Avatar>
+                    <Avatar>{userData.name.charAt(0).toUpperCase()}</Avatar>
                   </IconButton>
                 </Tooltip>
               </Toolbar>

@@ -41,7 +41,7 @@ const SignUp = () => {
     const data = new FormData(event.currentTarget);
     const signupData = {
       name: data.get("name"),
-      role: parseInt(role),
+      role: data.get("role"),
       email: data.get("email"),
       phoneNumber: data.get("phoneNumber"),
       password: data.get("password"),
@@ -55,15 +55,18 @@ const SignUp = () => {
   let roles = [
     {
       id: 1,
-      value: "Individual",
+      value: "individual",
+      placeholder: "Individual",
     },
     {
       id: 2,
-      value: "Company",
+      value: "company",
+      placeholder: "Company",
     },
     {
       id: 3,
-      value: "Other",
+      value: "other",
+      placeholder: "Other",
     },
   ];
 
@@ -116,7 +119,7 @@ const SignUp = () => {
                 >
                   {roles.map((role) => (
                     <MenuItem key={role.id} value={role.value}>
-                      {role.value}
+                      {role.placeholder}
                     </MenuItem>
                   ))}
                 </TextField>

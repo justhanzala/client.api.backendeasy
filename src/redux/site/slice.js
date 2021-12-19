@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const site = createSlice({
   name: "site",
   initialState: {
+    apiLoading: false,
     loading: false,
     message: {
       variant: "",
@@ -10,6 +11,9 @@ const site = createSlice({
     },
   },
   reducers: {
+    setApiLoading: (state, action) => {
+      state.apiLoading = action.payload;
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },

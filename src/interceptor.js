@@ -39,6 +39,7 @@ axios.interceptors.response.use(
     const { dispatch } = store;
     dispatch(siteSlice.actions.setMessage({ text: "", variant: "" }));
     dispatch(siteSlice.actions.setApiLoading(false));
+    dispatch(siteSlice.actions.setLoading(false));
     dispatch(
       siteSlice.actions.setMessage({ text: error.message.text, variant: "error" })
     );

@@ -44,7 +44,9 @@ const SignIn = () => {
     dispatch(signinAction({ signinData }));
   };
 
-  if (loggedIn) return <Redirect to={location?.state?.from} />;
+  if (loggedIn) {
+    return <Redirect to={location?.state?.from?.pathname} />;
+  }
 
   const theme = createTheme();
 

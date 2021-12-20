@@ -28,7 +28,7 @@ import {
   Logout,
 } from "@mui/icons-material";
 
-// Components
+// Component
 import SidebarItem from "./SidebarItem";
 
 const drawerWidth = 240;
@@ -79,15 +79,15 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const DashboardContent = ({ children, routes, loggedIn, userData }) => {
-  const { pathname } = useLocation();
-  const { title } = routes.find((route) => route.path === pathname) || {};
+  const location = useLocation();
+  const { title } = routes.find((route) => route.path === location.pathname) || {};
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open1 = Boolean(anchorEl);
+  const profileDropdownOpen = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -189,7 +189,7 @@ const DashboardContent = ({ children, routes, loggedIn, userData }) => {
       {/* Profile Dropwdown */}
       <Menu
         anchorEl={anchorEl}
-        open={open1}
+        open={profileDropdownOpen}
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{

@@ -50,7 +50,9 @@ const SignUp = () => {
     dispatch(signupAction({ signupData }));
   };
 
-  if (loggedIn) return <Redirect to={location?.state?.from} />;
+  if (loggedIn) {
+    return <Redirect to={location?.state?.from?.pathname} />;
+  }
 
   let roles = [
     {

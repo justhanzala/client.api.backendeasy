@@ -50,13 +50,15 @@ const SignIn = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            ml: 2,
+            height: "100%",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >

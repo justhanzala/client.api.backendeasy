@@ -73,7 +73,8 @@ const SignUp = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            ml: 2,
+            height: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

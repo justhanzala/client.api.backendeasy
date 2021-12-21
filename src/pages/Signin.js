@@ -45,7 +45,7 @@ const SignIn = () => {
   };
 
   if (loggedIn) {
-    return <Redirect to={location?.state?.from?.pathname} />;
+    return <Redirect to={location?.state?.from?.pathname || ""} />;
   }
 
   const theme = createTheme();

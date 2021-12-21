@@ -35,6 +35,7 @@ const ApiCategories = () => {
     >
       {ApiCategory.map(({ click, title, path }, i) => (
         <Button
+          key={i}
           variant="contained"
           color="inherit"
           sx={{

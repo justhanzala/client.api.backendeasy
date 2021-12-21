@@ -16,17 +16,17 @@ const PublicApi = () => {
   return (
     <>
       <ApiCategories />
-      <Card sx={{ maxWidth: 500, mr: 3, mb: 4, height: "400px" }}>
+      <Card sx={{ maxWidth: 500, mr: 3, mb: 4, height: "500px" }}>
         <CardActionArea>
           <CardMedia
             component="img"
-            height="200"
+            height="250"
             image={PublicApiImg}
             alt="Img"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Lizard
+              Public APIs
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Lizards are a widespread group of squamate reptiles, with over

@@ -79,6 +79,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const DashboardContent = ({ children, routes }) => {
+  // Get user details from redux store
   const {
     user: { userData, loggedIn },
   } = useSelector((state) => state);
@@ -86,6 +87,7 @@ const DashboardContent = ({ children, routes }) => {
   const location = useLocation();
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);

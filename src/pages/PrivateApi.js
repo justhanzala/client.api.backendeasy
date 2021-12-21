@@ -1,4 +1,6 @@
 import React from "react";
+
+// Styled Modules
 import {
   Card,
   CardActionArea,
@@ -10,6 +12,7 @@ import {
 // Component
 import ApiCategories from "../components/ApiCategories";
 
+// Image
 import PrivateApiImg from "../assets/img/private-api.jpg";
 
 const PrivateApi = () => {

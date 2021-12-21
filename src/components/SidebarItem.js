@@ -1,13 +1,9 @@
 import * as React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-// Material UI Modules
+// Styled Modules
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
-
-// Material UI Colors
 import { grey } from "@mui/material/colors";
-
-// Material UI Icons
 import {
   Dashboard as DashboardIcon,
   Api as ApiIcon,

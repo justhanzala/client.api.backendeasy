@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Styled Modules
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
@@ -23,7 +24,6 @@ import {
 import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  PersonAdd,
   Settings,
   Logout,
 } from "@mui/icons-material";
@@ -78,9 +78,14 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-const DashboardContent = ({ children, routes, loggedIn, userData }) => {
+const DashboardContent = ({ children, routes }) => {
+  const {
+    user: { userData, loggedIn },
+  } = useSelector((state) => state);
+
   const location = useLocation();
-  const { title } = routes.find((route) => route.path === location.pathname) || {};
+  const { title } =
+    routes.find((route) => route.path === location.pathname) || {};
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -222,18 +227,9 @@ const DashboardContent = ({ children, routes, loggedIn, userData }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> My account
+          <Avatar /> {userData.name}
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />

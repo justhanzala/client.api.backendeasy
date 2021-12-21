@@ -51,7 +51,7 @@ const SignUp = () => {
   };
 
   if (loggedIn) {
-    return <Redirect to={location?.state?.from?.pathname} />;
+    return <Redirect to={location?.state?.from?.pathname || ""} />;
   }
 
   let roles = [

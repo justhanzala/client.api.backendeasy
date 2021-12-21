@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
   const {
     site: { apiLoading, loading },
-    user: { loggedIn, userData },
+    user: { loggedIn },
   } = useSelector((state) => state);
   const jwtToken = localStorage.getItem("token");
 
@@ -43,7 +43,7 @@ function App() {
             </Box>
           )}
           <Router>
-            <Layout routes={routes} loggedIn={loggedIn} userData={userData} >
+            <Layout routes={routes}>
               <Switch>
                 {routes.map(({ exact, path, component, auth, title }) => {
                   if (auth) {

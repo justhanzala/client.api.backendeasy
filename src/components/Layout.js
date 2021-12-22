@@ -24,8 +24,8 @@ import {
 import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  Settings,
-  Logout,
+  Settings as SettingsIcon,
+  Logout as LogoutIcon,
 } from "@mui/icons-material";
 
 // Component
@@ -234,13 +234,13 @@ const DashboardContent = ({ children, routes }) => {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <SettingsIcon fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
         <MenuItem onClick={LogoutAction}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <LogoutIcon fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>

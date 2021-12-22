@@ -18,22 +18,23 @@ import { Close as CloseIcon } from "@mui/icons-material";
 import ApiCategories from "../components/ApiCategories";
 
 const PublicApi = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "80%",
-    height: "80%",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    transition: "all 0.4s ease-in",
-    overflow: "scroll",
+  const [ApiData, setApiData] = React.useState({
+    apiName: "Signup",
+    apiType: "POST",
+    name: "",
+    email: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setApiData({
+      ...ApiData,
+      [name]: value,
+    });
   };
+
+  const [ModalOpen, setModalOpen] = React.useState(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
 
   return (
     <>
@@ -55,27 +56,42 @@ const PublicApi = () => {
         </CardActionArea>
       </Card>
       {/* Modal */}
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
+      <Modal open={ModalOpen} onClose={handleClose}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "80%",
+            height: "80%",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            transition: "all 0.4s ease-in",
+            overflow: "auto",
+          }}
+        >
           <Box
-            className="sticky-top"
+            className="sticky-top d-flex justify-content-between align-items-center"
             sx={{
               bgcolor: "primary.main",
               px: 3,
               py: 2,
-              display: "flex",
-              alignItems: "center",
             }}
           >
+            <Typography variant="h6" color="white">
+              Signup API
+            </Typography>
             <IconButton onClick={handleClose}>
               <CloseIcon className="text-white fs-3" />
             </IconButton>
-            <Typography variant="h6" color="white" className="ms-3 mb-0">
-              Signup API
-            </Typography>
           </Box>
           <div className="container mt-5">
-            <Box component="form">
+            <Box
+              component="form"
+              className="mb-5"
+              onSubmit={(event) => event.preventDefault()}
+            >
               <Box sx={{ width: "100%", display: "flex" }}>
                 <Box sx={{ width: "50%", mr: 2 }}>
                   <Box sx={{ mb: 4 }}>
@@ -85,8 +101,11 @@ const PublicApi = () => {
                   </Box>
                   <Box sx={{ mb: 4 }}>
                     <TextField
+                      id="apiName"
+                      name="apiName"
                       label="API Name"
-                      value="Signup"
+                      value={ApiData.apiName}
+                      onChange={handleChange}
                       fullWidth
                       disabled
                       variant="outlined"
@@ -94,8 +113,11 @@ const PublicApi = () => {
                   </Box>
                   <Box sx={{ mb: 4 }}>
                     <TextField
+                      id="apiType"
+                      name="apiType"
                       label="API Type"
-                      value="POST"
+                      value={ApiData.apiType}
+                      onChange={handleChange}
                       fullWidth
                       disabled
                       variant="outlined"
@@ -109,10 +131,26 @@ const PublicApi = () => {
                     </Typography>
                   </Box>
                   <Box sx={{ mb: 4 }}>
-                    <TextField label="Name" fullWidth variant="outlined" />
+                    <TextField
+                      id="name"
+                      name="name"
+                      label="Name"
+                      value={ApiData.name}
+                      onChange={handleChange}
+                      fullWidth
+                      variant="outlined"
+                    />
                   </Box>
                   <Box sx={{ mb: 4 }}>
-                    <TextField label="Email" fullWidth variant="outlined" />
+                    <TextField
+                      id="email"
+                      name="email"
+                      label="Email"
+                      value={ApiData.email}
+                      onChange={handleChange}
+                      fullWidth
+                      variant="outlined"
+                    />
                   </Box>
                 </Box>
               </Box>

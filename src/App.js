@@ -1,24 +1,29 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
-import { useSelector, useDispatch } from "react-redux";
-import { LinearProgress, Box, CircularProgress } from "@mui/material";
-import { getUser as getUserAction } from "./redux/user/actions";
 
-// components
+// Styled Modules
+import { LinearProgress, Box, CircularProgress } from "@mui/material";
+
+// Components
+import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
 
-// Pages
+// Redux Actions
+import { useSelector, useDispatch } from "react-redux";
+import { getUser as getUserAction } from "./redux/user/actions";
+
+// Routes
 import routes from "./routes";
 
 function App() {
   const dispatch = useDispatch();
+
   const {
     site: { apiLoading, loading },
     user: { loggedIn },
   } = useSelector((state) => state);
-  const jwtToken = localStorage.getItem("token");
 
+  const jwtToken = localStorage.getItem("token");
   useEffect(() => {
     if (jwtToken) {
       dispatch(getUserAction());

@@ -27,10 +27,12 @@ const PublicApi = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "100%",
-    height: "100%",
+    width: "80%",
+    height: "80%",
     bgcolor: "background.paper",
     boxShadow: 24,
+    transition: "all 0.4s ease-in",
+    overflow: "scroll",
   };
 
   return (
@@ -56,6 +58,7 @@ const PublicApi = () => {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Box
+            className="sticky-top"
             sx={{
               bgcolor: "primary.main",
               px: 3,
@@ -64,8 +67,8 @@ const PublicApi = () => {
               alignItems: "center",
             }}
           >
-            <IconButton>
-              <CloseIcon className="text-white fs-3" onClick={handleClose} />
+            <IconButton onClick={handleClose}>
+              <CloseIcon className="text-white fs-3" />
             </IconButton>
             <Typography variant="h6" color="white" className="ms-3 mb-0">
               Signup API
@@ -113,14 +116,8 @@ const PublicApi = () => {
                   </Box>
                 </Box>
               </Box>
-
-              <Box sx={{ width: "100%" }}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  color="primary"
-                >
+              <Box>
+                <Button type="submit" variant="contained" color="primary">
                   Submit
                 </Button>
               </Box>

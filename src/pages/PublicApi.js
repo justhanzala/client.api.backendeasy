@@ -21,8 +21,11 @@ const PublicApi = () => {
   const [ApiData, setApiData] = React.useState({
     apiName: "Signup",
     apiType: "POST",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
+    phoneNumber: "",
+    password: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,8 +52,11 @@ const PublicApi = () => {
               Sign Up API
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              An application programming interface is a connection between
+              computers or between computer programs. It is a type of software
+              interface, offering a service to other pieces of software. A
+              document or standard that describes how to build or use such a
+              connection or interface is called an API specification.
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -70,6 +76,7 @@ const PublicApi = () => {
             transition: "all 0.4s ease-in",
             overflow: "auto",
           }}
+          className="rounded"
         >
           <Box
             className="sticky-top d-flex justify-content-between align-items-center"
@@ -86,72 +93,105 @@ const PublicApi = () => {
               <CloseIcon className="text-white fs-3" />
             </IconButton>
           </Box>
-          <div className="container mt-5">
+          <Box className="container" sx={{ mt: 4 }}>
             <Box
               component="form"
-              className="mb-5"
+              sx={{ mb: 4 }}
               onSubmit={(event) => event.preventDefault()}
             >
-              <Box sx={{ width: "100%", display: "flex" }}>
-                <Box sx={{ width: "50%", mr: 2 }}>
-                  <Box sx={{ mb: 4 }}>
-                    <Typography variant="h6" color="black">
-                      Default Fields
-                    </Typography>
-                  </Box>
-                  <Box sx={{ mb: 4 }}>
-                    <TextField
-                      id="apiName"
-                      name="apiName"
-                      label="API Name"
-                      value={ApiData.apiName}
-                      onChange={handleChange}
-                      fullWidth
-                      disabled
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Box sx={{ mb: 4 }}>
-                    <TextField
-                      id="apiType"
-                      name="apiType"
-                      label="API Type"
-                      value={ApiData.apiType}
-                      onChange={handleChange}
-                      fullWidth
-                      disabled
-                      variant="outlined"
-                    />
-                  </Box>
+              <Box className="w-100">
+                <Box sx={{ mb: 4 }} className="ms-1">
+                  <Typography variant="h6" color="black">
+                    Default Fields
+                  </Typography>
                 </Box>
-                <Box sx={{ width: "50%" }}>
-                  <Box sx={{ mb: 4 }}>
-                    <Typography variant="h6" color="black">
-                      Payload
-                    </Typography>
-                  </Box>
-                  <Box sx={{ mb: 4 }}>
-                    <TextField
-                      id="name"
-                      name="name"
-                      label="Name"
-                      value={ApiData.name}
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Box sx={{ mb: 4 }}>
-                    <TextField
-                      id="email"
-                      name="email"
-                      label="Email"
-                      value={ApiData.email}
-                      onChange={handleChange}
-                      fullWidth
-                      variant="outlined"
-                    />
-                  </Box>
+                <Box sx={{ mb: 4 }}>
+                  <TextField
+                    id="apiName"
+                    name="apiName"
+                    label="API Name"
+                    value={ApiData.apiName}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ mb: 4 }}>
+                  <TextField
+                    id="apiType"
+                    name="apiType"
+                    label="API Type"
+                    value={ApiData.apiType}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ mb: 4 }} className="ms-1">
+                  <Typography variant="h6" color="black">
+                    Payload
+                  </Typography>
+                </Box>
+                <Box sx={{ mb: 3 }} className="d-flex">
+                  <TextField
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    label="First Name"
+                    value={ApiData.firstName}
+                    onChange={handleChange}
+                    variant="outlined"
+                    className="me-2"
+                    fullWidth
+                  />
+                  <TextField
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    label="Last Name"
+                    value={ApiData.lastName}
+                    onChange={handleChange}
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ mb: 3 }}>
+                  <TextField
+                    type="email"
+                    id="email"
+                    name="email"
+                    label="Email Address"
+                    value={ApiData.email}
+                    onChange={handleChange}
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ mb: 3 }}>
+                  <TextField
+                    type="number"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    label="Phone Number"
+                    value={ApiData.phoneNumber}
+                    onChange={handleChange}
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Box>
+                <Box sx={{ mb: 3 }}>
+                  <TextField
+                    type="password"
+                    id="password"
+                    name="password"
+                    label="Password"
+                    value={ApiData.password}
+                    onChange={handleChange}
+                    variant="outlined"
+                    fullWidth
+                  />
                 </Box>
               </Box>
               <Box>
@@ -160,7 +200,7 @@ const PublicApi = () => {
                 </Button>
               </Box>
             </Box>
-          </div>
+          </Box>
         </Box>
       </Modal>
     </>

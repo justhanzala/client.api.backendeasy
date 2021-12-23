@@ -32,8 +32,11 @@ const PrivateApi = () => {
               Private APIs
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              An application programming interface is a connection between
+              computers or between computer programs. It is a type of software
+              interface, offering a service to other pieces of software. A
+              document or standard that describes how to build or use such a
+              connection or interface is called an API specification.
             </Typography>
           </CardContent>
         </CardActionArea>

@@ -35,7 +35,9 @@ const SidebarItem = () => {
           key={i}
           button
           onClick={click}
-          sx={{ bgcolor: location.pathname === path ? grey[100] : "white" }}
+          sx={{
+            bgcolor: location.pathname === path ? grey[100] : "white",
+          }}
         >
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText primary={title} />

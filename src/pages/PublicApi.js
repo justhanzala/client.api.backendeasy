@@ -69,8 +69,8 @@ const PublicApi = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "80%",
-            height: "80%",
+            width: "100%",
+            height: "100%",
             bgcolor: "background.paper",
             boxShadow: 24,
             transition: "all 0.4s ease-in",
@@ -93,111 +93,119 @@ const PublicApi = () => {
               <CloseIcon className="text-white fs-3" />
             </IconButton>
           </Box>
-          <Box className="container" sx={{ mt: 4 }}>
+          <Box sx={{ mt: 10 }}>
             <Box
               component="form"
               sx={{ mb: 4 }}
-              onSubmit={(event) => event.preventDefault()}
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
             >
-              <Box className="w-100">
-                <Box sx={{ mb: 4 }} className="ms-1">
-                  <Typography variant="h6" color="black">
-                    Default Fields
-                  </Typography>
+              <Box className="w-100 d-flex justify-content-around">
+                <Box className="me-4" sx={{ width: "40%" }}>
+                  <Box sx={{ mb: 4 }} className="ms-1">
+                    <Typography variant="h6" color="black">
+                      Default Fields
+                    </Typography>
+                  </Box>
+                  <Box sx={{ mb: 4 }}>
+                    <TextField
+                      id="apiName"
+                      name="apiName"
+                      label="API Name"
+                      value={ApiData.apiName}
+                      onChange={handleChange}
+                      variant="outlined"
+                      disabled
+                      fullWidth
+                    />
+                  </Box>
+                  <Box sx={{ mb: 4 }}>
+                    <TextField
+                      id="apiType"
+                      name="apiType"
+                      label="API Type"
+                      value={ApiData.apiType}
+                      onChange={handleChange}
+                      variant="outlined"
+                      disabled
+                      fullWidth
+                    />
+                  </Box>
                 </Box>
-                <Box sx={{ mb: 4 }}>
-                  <TextField
-                    id="apiName"
-                    name="apiName"
-                    label="API Name"
-                    value={ApiData.apiName}
-                    onChange={handleChange}
-                    variant="outlined"
-                    disabled
-                    fullWidth
-                  />
+                <Box sx={{ width: "40%" }}>
+                  <Box sx={{ mb: 4 }} className="ms-1">
+                    <Typography variant="h6" color="black">
+                      Payload
+                    </Typography>
+                  </Box>
+                  <Box sx={{ mb: 3 }}>
+                    <TextField
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      label="First Name"
+                      value={ApiData.firstName}
+                      onChange={handleChange}
+                      variant="outlined"
+                      className="me-2"
+                      fullWidth
+                    />
+                  </Box>
+                  <Box sx={{ mb: 3 }}>
+                    <TextField
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      label="Last Name"
+                      value={ApiData.lastName}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Box>
+                  <Box sx={{ mb: 3 }}>
+                    <TextField
+                      type="email"
+                      id="email"
+                      name="email"
+                      label="Email Address"
+                      value={ApiData.email}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Box>
+                  <Box sx={{ mb: 3 }}>
+                    <TextField
+                      type="number"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      label="Phone Number"
+                      value={ApiData.phoneNumber}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Box>
+                  <Box sx={{ mb: 3 }}>
+                    <TextField
+                      type="password"
+                      id="password"
+                      name="password"
+                      label="Password"
+                      value={ApiData.password}
+                      onChange={handleChange}
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </Box>
+                  <Box>
+                    <Button type="submit" variant="contained" color="primary">
+                      Submit
+                    </Button>
+                  </Box>
                 </Box>
-                <Box sx={{ mb: 4 }}>
-                  <TextField
-                    id="apiType"
-                    name="apiType"
-                    label="API Type"
-                    value={ApiData.apiType}
-                    onChange={handleChange}
-                    variant="outlined"
-                    disabled
-                    fullWidth
-                  />
-                </Box>
-                <Box sx={{ mb: 4 }} className="ms-1">
-                  <Typography variant="h6" color="black">
-                    Payload
-                  </Typography>
-                </Box>
-                <Box sx={{ mb: 3 }} className="d-flex">
-                  <TextField
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    label="First Name"
-                    value={ApiData.firstName}
-                    onChange={handleChange}
-                    variant="outlined"
-                    className="me-2"
-                    fullWidth
-                  />
-                  <TextField
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    label="Last Name"
-                    value={ApiData.lastName}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Box>
-                <Box sx={{ mb: 3 }}>
-                  <TextField
-                    type="email"
-                    id="email"
-                    name="email"
-                    label="Email Address"
-                    value={ApiData.email}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Box>
-                <Box sx={{ mb: 3 }}>
-                  <TextField
-                    type="number"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    label="Phone Number"
-                    value={ApiData.phoneNumber}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Box>
-                <Box sx={{ mb: 3 }}>
-                  <TextField
-                    type="password"
-                    id="password"
-                    name="password"
-                    label="Password"
-                    value={ApiData.password}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                  />
-                </Box>
-              </Box>
-              <Box>
-                <Button type="submit" variant="contained" color="primary">
-                  Submit
-                </Button>
               </Box>
             </Box>
           </Box>

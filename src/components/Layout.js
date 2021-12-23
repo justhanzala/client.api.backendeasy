@@ -236,6 +236,12 @@ const DashboardContent = ({ children, routes }) => {
           <ListItemIcon>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>
+          Account Settings
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <SettingsIcon fontSize="small" />
+          </ListItemIcon>
           Settings
         </MenuItem>
         <MenuItem onClick={LogoutAction}>

@@ -242,7 +242,7 @@ const PublicApi = () => {
                       <Box className="p-4">
                         <Box className="d-flex align-items-center">
                           <Box className="">
-                            <TextField type="text" name="name" label="Name" />
+                            <TextField type="text" name="key" label="Key" />
                           </Box>
                           <p className="mx-2 mt-3">=</p>
                           <Box className="me-3">

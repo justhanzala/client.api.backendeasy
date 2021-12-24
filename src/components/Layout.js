@@ -121,18 +121,20 @@ const DashboardContent = ({ children, routes }) => {
                   pr: "24px", // keep right padding when drawer closed
                 }}
               >
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={toggleDrawer}
-                  sx={{
-                    marginRight: "36px",
-                    ...(open && { display: "none" }),
-                  }}
-                >
-                  <ChevronRightIcon sx={{ color: "white" }} />
-                </IconButton>
+                <Tooltip title="Open">
+                  <IconButton
+                    edge="start"
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={toggleDrawer}
+                    sx={{
+                      marginRight: "36px",
+                      ...(open && { display: "none" }),
+                    }}
+                  >
+                    <ChevronRightIcon sx={{ color: "white" }} />
+                  </IconButton>
+                </Tooltip>
                 <Typography
                   component="h1"
                   variant="h6"
@@ -159,12 +161,14 @@ const DashboardContent = ({ children, routes }) => {
                   px: [1],
                 }}
               >
-                <IconButton
-                  onClick={toggleDrawer}
-                  sx={{ display: "flex", flexDirection: "column" }}
-                >
-                  <ChevronLeftIcon sx={{ color: "black" }} />
-                </IconButton>
+                <Tooltip title="Close">
+                  <IconButton
+                    onClick={toggleDrawer}
+                    sx={{ display: "flex", flexDirection: "column" }}
+                  >
+                    <ChevronLeftIcon sx={{ color: "black" }} />
+                  </IconButton>
+                </Tooltip>
               </Toolbar>
               <Divider />
               <List>

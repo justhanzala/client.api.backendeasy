@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 // Styled Modules
 import {
@@ -11,6 +11,8 @@ import {
   TextField,
   Button,
   IconButton,
+  Popover,
+  MenuItem,
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 
@@ -18,7 +20,8 @@ import { Close as CloseIcon } from "@mui/icons-material";
 import ApiCategories from "../components/ApiCategories";
 
 const PublicApi = () => {
-  const [ApiData, setApiData] = React.useState({
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [ApiData, setApiData] = useState({
     apiName: "Signup",
     apiType: "POST",
     firstName: "",
@@ -27,6 +30,11 @@ const PublicApi = () => {
     phoneNumber: "",
     password: "",
   });
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setApiData({
@@ -35,16 +43,22 @@ const PublicApi = () => {
     });
   };
 
-  const [ModalOpen, setModalOpen] = React.useState(false);
-  const handleOpen = () => setModalOpen(true);
-  const handleClose = () => setModalOpen(false);
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const PopoverOpen = Boolean(anchorEl);
 
   return (
     <>
       <ApiCategories />
       <Card
         sx={{ maxWidth: 500, mr: 3, mb: 4, height: "100%" }}
-        onClick={handleOpen}
+        onClick={handleModalOpen}
       >
         <CardActionArea>
           <CardContent>
@@ -62,7 +76,7 @@ const PublicApi = () => {
         </CardActionArea>
       </Card>
       {/* Modal */}
-      <Modal open={ModalOpen} onClose={handleClose}>
+      <Modal open={ModalOpen} onClose={handleModalClose}>
         <Box
           sx={{
             position: "absolute",
@@ -89,7 +103,7 @@ const PublicApi = () => {
             <Typography variant="h6" color="white">
               Signup API
             </Typography>
-            <IconButton onClick={handleClose}>
+            <IconButton onClick={handleModalClose}>
               <CloseIcon className="text-white fs-3" />
             </IconButton>
           </Box>
@@ -200,10 +214,82 @@ const PublicApi = () => {
                       fullWidth
                     />
                   </Box>
-                  <Box>
+                  <Box className="d-flex justify-content-between align-items-center">
                     <Button type="submit" variant="contained" color="primary">
                       Submit
                     </Button>
+                    <Button
+                      variant="contained"
+                      color="inherit"
+                      onClick={handlePopoverOpen}
+                    >
+                      Add Field
+                    </Button>
+                    {/* Add Field Popover */}
+                    <Popover
+                      open={PopoverOpen}
+                      anchorEl={anchorEl}
+                      onClose={handlePopoverClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                      }}
+                    >
+                      <Box className="p-4">
+                        <Box className="d-flex align-items-center">
+                          <Box className="">
+                            <TextField type="text" name="name" label="Name" />
+                          </Box>
+                          <p className="mx-2 mt-3">=</p>
+                          <Box className="me-3">
+                            <TextField
+                              name="type"
+                              label="Type"
+                              variant="outlined"
+                              defaultValue={"text"}
+                              fullWidth
+                              select
+                            >
+                              {["text", "email", "number", "password"].map(
+                                (inputType) => (
+                                  <MenuItem
+                                    key={inputType}
+                                    value={inputType}
+                                    className="overflow-auto"
+                                  >
+                                    {inputType}
+                                  </MenuItem>
+                                )
+                              )}
+                            </TextField>
+                          </Box>
+                          <Box>
+                            <TextField type="text" name="label" label="Label" />
+                          </Box>
+                        </Box>
+                        <Box className="d-flex justify-content-end mt-4">
+                          <Button
+                            variant="contained"
+                            color="inherit"
+                            className="me-3 text-capitalize"
+                            onClick={handlePopoverClose}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            className="text-capitalize"
+                          >
+                            Add
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Popover>
                   </Box>
                 </Box>
               </Box>

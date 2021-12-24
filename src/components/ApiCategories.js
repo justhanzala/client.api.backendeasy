@@ -25,14 +25,7 @@ const ApiCategories = () => {
   ];
 
   return (
-    <Box
-      sx={{
-        mb: 4,
-        display: "flex",
-        width: "100%",
-      }}
-      className="sticky-top"
-    >
+    <Box className="d-flex mb-4 w-100 sticky-top">
       {ApiCategory.map(({ click, title, path }, i) => (
         <Button
           key={i}
@@ -42,7 +35,7 @@ const ApiCategories = () => {
             width: "50%",
             p: 2,
             textTransform: "capitalize",
-            bgcolor: location.pathname === path ? grey[300] : grey[100],
+            bgcolor: location.pathname === path ? grey[200] : grey[100],
           }}
           onClick={click}
         >

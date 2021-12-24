@@ -24,8 +24,8 @@ import {
 import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  Settings,
-  Logout,
+  Settings as SettingsIcon,
+  Logout as LogoutIcon,
 } from "@mui/icons-material";
 
 // Component
@@ -79,6 +79,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const DashboardContent = ({ children, routes }) => {
+  // Get user details from redux store
   const {
     user: { userData, loggedIn },
   } = useSelector((state) => state);
@@ -86,6 +87,7 @@ const DashboardContent = ({ children, routes }) => {
   const location = useLocation();
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -119,18 +121,20 @@ const DashboardContent = ({ children, routes }) => {
                   pr: "24px", // keep right padding when drawer closed
                 }}
               >
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={toggleDrawer}
-                  sx={{
-                    marginRight: "36px",
-                    ...(open && { display: "none" }),
-                  }}
-                >
-                  <ChevronRightIcon sx={{ color: "white" }} />
-                </IconButton>
+                <Tooltip title="Open">
+                  <IconButton
+                    edge="start"
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={toggleDrawer}
+                    sx={{
+                      marginRight: "36px",
+                      ...(open && { display: "none" }),
+                    }}
+                  >
+                    <ChevronRightIcon sx={{ color: "white" }} />
+                  </IconButton>
+                </Tooltip>
                 <Typography
                   component="h1"
                   variant="h6"
@@ -157,12 +161,14 @@ const DashboardContent = ({ children, routes }) => {
                   px: [1],
                 }}
               >
-                <IconButton
-                  onClick={toggleDrawer}
-                  sx={{ display: "flex", flexDirection: "column" }}
-                >
-                  <ChevronLeftIcon sx={{ color: "black" }} />
-                </IconButton>
+                <Tooltip title="Close">
+                  <IconButton
+                    onClick={toggleDrawer}
+                    sx={{ display: "flex", flexDirection: "column" }}
+                  >
+                    <ChevronLeftIcon sx={{ color: "black" }} />
+                  </IconButton>
+                </Tooltip>
               </Toolbar>
               <Divider />
               <List>
@@ -232,13 +238,19 @@ const DashboardContent = ({ children, routes }) => {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <SettingsIcon fontSize="small" />
+          </ListItemIcon>
+          Account Settings
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <SettingsIcon fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
         <MenuItem onClick={LogoutAction}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <LogoutIcon fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>

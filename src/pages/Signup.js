@@ -23,7 +23,7 @@ import { signup as signupAction } from "../redux/user/actions";
 import { useLocation, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-// Components
+// Component
 import Copyright from "../components/Copyright";
 
 const theme = createTheme();

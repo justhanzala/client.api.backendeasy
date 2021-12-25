@@ -43,7 +43,7 @@ export function* getUser() {
     yield put(siteSlice.actions.setLoading(true));
     const {
       data: { data, loggedIn },
-    } = yield call(axios.get, `${baseUrl}/getUser`);
+    } = yield call(axios.get, `${baseUrl}/get`);
 
     yield put(slice.actions.setUserData(data));
     yield put(slice.actions.setLoggedIn(loggedIn));

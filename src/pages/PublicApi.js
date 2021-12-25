@@ -127,7 +127,7 @@ const PublicApi = () => {
             sx={{
               bgcolor: "primary.main",
               px: 3,
-              py: 2,
+              py: 1,
             }}
           >
             <Typography variant="h6" color="white">

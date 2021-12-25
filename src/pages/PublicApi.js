@@ -21,14 +21,22 @@ import ApiCategories from "../components/ApiCategories";
 
 const PublicApi = () => {
   const [ModalOpen, setModalOpen] = useState(false);
-  const [ApiData, setApiData] = useState({
-    apiName: "Signup",
-    apiType: "POST",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
+  const [apiData, setApiData] = useState([
+    {
+      key: "name",
+      type: "text",
+      label: "Name",
+    },
+    {
+      key: "email",
+      type: "email",
+      label: "Email",
+    },
+  ]);
+  const [fieldData, setFieldData] = useState({
+    key: "",
+    type: "",
+    label: "",
   });
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,10 +44,27 @@ const PublicApi = () => {
   const handleModalClose = () => setModalOpen(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setApiData({
-      ...ApiData,
+    const { value, name } = e.target;
+
+    setFieldData({
+      ...fieldData,
       [name]: value,
+    });
+  };
+
+  const handleAddApiData = () => {
+    setApiData([
+      ...apiData,
+      {
+        ...fieldData,
+      },
+    ]);
+    setAnchorEl(null);
+  };
+
+  const handleRemoveApiData = (idx) => {
+    setApiData((prevState) => {
+      return prevState.filter((f, index) => index !== idx);
     });
   };
 
@@ -48,6 +73,11 @@ const PublicApi = () => {
   };
 
   const handlePopoverClose = () => {
+    setFieldData({
+      key: "",
+      type: "",
+      label: "",
+    });
     setAnchorEl(null);
   };
 
@@ -126,9 +156,7 @@ const PublicApi = () => {
                     <TextField
                       id="apiName"
                       name="apiName"
-                      label="API Name"
-                      value={ApiData.apiName}
-                      onChange={handleChange}
+                      label="API Name: signup"
                       variant="outlined"
                       disabled
                       fullWidth
@@ -138,9 +166,7 @@ const PublicApi = () => {
                     <TextField
                       id="apiType"
                       name="apiType"
-                      label="API Type"
-                      value={ApiData.apiType}
-                      onChange={handleChange}
+                      label="API Type: POST"
                       variant="outlined"
                       disabled
                       fullWidth
@@ -153,67 +179,29 @@ const PublicApi = () => {
                       Payload
                     </Typography>
                   </Box>
-                  <Box sx={{ mb: 3 }}>
-                    <TextField
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      label="First Name"
-                      value={ApiData.firstName}
-                      onChange={handleChange}
-                      variant="outlined"
-                      className="me-2"
-                      fullWidth
-                    />
-                  </Box>
-                  <Box sx={{ mb: 3 }}>
-                    <TextField
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      label="Last Name"
-                      value={ApiData.lastName}
-                      onChange={handleChange}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Box>
-                  <Box sx={{ mb: 3 }}>
-                    <TextField
-                      type="email"
-                      id="email"
-                      name="email"
-                      label="Email Address"
-                      value={ApiData.email}
-                      onChange={handleChange}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Box>
-                  <Box sx={{ mb: 3 }}>
-                    <TextField
-                      type="number"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      label="Phone Number"
-                      value={ApiData.phoneNumber}
-                      onChange={handleChange}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Box>
-                  <Box sx={{ mb: 3 }}>
-                    <TextField
-                      type="password"
-                      id="password"
-                      name="password"
-                      label="Password"
-                      value={ApiData.password}
-                      onChange={handleChange}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Box>
+                  {apiData.map((field, idx) => {
+                    return (
+                      <Box sx={{ mb: 3 }} key={field.key}>
+                        <TextField
+                          disabled
+                          type={field.type}
+                          name={field.key}
+                          label={field.label}
+                          variant="outlined"
+                          className="me-2"
+                          fullWidth
+                          InputProps={{
+                            endAdornment: (
+                              <CloseIcon
+                                className="cursorPointer"
+                                onClick={() => handleRemoveApiData(idx)}
+                              />
+                            ),
+                          }}
+                        />
+                      </Box>
+                    );
+                  })}
                   <Box className="d-flex justify-content-between align-items-center">
                     <Button type="submit" variant="contained" color="primary">
                       Submit
@@ -225,6 +213,7 @@ const PublicApi = () => {
                     >
                       Add Field
                     </Button>
+
                     {/* Add Field Popover */}
                     <Popover
                       open={PopoverOpen}
@@ -242,7 +231,12 @@ const PublicApi = () => {
                       <Box className="p-4">
                         <Box className="d-flex align-items-center">
                           <Box className="">
-                            <TextField type="text" name="key" label="Key" />
+                            <TextField
+                              type="text"
+                              name="key"
+                              label="Key"
+                              onChange={handleChange}
+                            />
                           </Box>
                           <p className="mx-2 mt-3">=</p>
                           <Box className="me-3">
@@ -250,6 +244,7 @@ const PublicApi = () => {
                               name="type"
                               label="Type"
                               variant="outlined"
+                              onChange={handleChange}
                               defaultValue={"text"}
                               fullWidth
                               select
@@ -268,7 +263,12 @@ const PublicApi = () => {
                             </TextField>
                           </Box>
                           <Box>
-                            <TextField type="text" name="label" label="Label" />
+                            <TextField
+                              type="text"
+                              name="label"
+                              label="Label"
+                              onChange={handleChange}
+                            />
                           </Box>
                         </Box>
                         <Box className="d-flex justify-content-end mt-4">
@@ -284,6 +284,7 @@ const PublicApi = () => {
                             variant="contained"
                             color="primary"
                             className="text-capitalize"
+                            onClick={handleAddApiData}
                           >
                             Add
                           </Button>

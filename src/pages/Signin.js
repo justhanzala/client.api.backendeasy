@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
 
-// Redux Actions
+// Redux
 import { signin as signinAction } from "../redux/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,12 +32,10 @@ const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
     const signinData = {
       email: data.get("email"),
       password: data.get("password"),
     };
-
     dispatch(signinAction({ signinData }));
   };
 

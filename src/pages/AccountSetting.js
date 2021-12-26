@@ -25,8 +25,9 @@ import {
 // Redux
 import { useSelector } from "react-redux";
 
-// Component
+// Components
 import Banner from "../components/Banner";
+import AccountPreferences from "../components/AccountPreferences";
 
 const AccountSetting = () => {
   const [expanded, setExpanded] = React.useState(false);
@@ -43,29 +44,6 @@ const AccountSetting = () => {
   const handleAccordionChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-  const Links = [
-    {
-      click: () => console.log("Clicked"),
-      title: "Profile",
-      path: "/",
-    },
-    {
-      click: () => console.log("Clicked"),
-      title: "Account Setting",
-      path: "/",
-    },
-    {
-      click: () => console.log("Clicked"),
-      title: "Database Setting",
-      path: "/",
-    },
-    {
-      click: () => console.log("Clicked"),
-      title: "Product",
-      path: "/",
-    },
-  ];
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -91,24 +69,7 @@ const AccountSetting = () => {
     <>
       <Banner firstElement={firstElement} secondElement={secondElement} />
       <Container className="d-flex" sx={{ mt: 6 }}>
-        <Box
-          className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-4"
-          sx={{ height: "90vh", position: "sticky", top: "1.5rem", zIndex: 6 }}
-        >
-          <Box className="px-3 py-3">
-            <Typography variant="p" color="black">
-              Account preferences
-            </Typography>
-          </Box>
-          <Divider />
-          <Box>
-            {Links.map(({ click, title, path }, i) => (
-              <ListItem button onClick={click} key={i}>
-                <ListItemText primary={title} className="ms-0" />
-              </ListItem>
-            ))}
-          </Box>
-        </Box>
+        <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
           <Box className="py-3 px-2">
             <Typography variant="h5" color="black">

@@ -1,6 +1,7 @@
 import * as React from "react";
+import { useLocation, Redirect } from "react-router-dom";
 
-// Material UI Modules
+// Styled Modules
 import {
   Avatar,
   Button,
@@ -14,13 +15,10 @@ import {
   Link,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-// Material UI Icons
 import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
 
-// Actions
+// Redux
 import { signup as signupAction } from "../redux/user/actions";
-import { useLocation, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // Component

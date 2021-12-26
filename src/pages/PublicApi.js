@@ -22,6 +22,7 @@ import {
 
 // Component
 import ApiCategories from "../components/ApiCategories";
+import Banner from "../components/Banner";
 
 const PublicApi = () => {
   const [ModalOpen, setModalOpen] = useState(false);
@@ -107,6 +108,18 @@ const PublicApi = () => {
 
   const PopoverOpen = Boolean(anchorEl);
 
+  // Banner elements for pass to the props
+  const firstElement = (
+    <Typography variant="h6" color="white">
+      Signup API
+    </Typography>
+  );
+  const secondElement = (
+    <IconButton onClick={handleModalClose}>
+      <CloseIcon className="text-white fs-3" />
+    </IconButton>
+  );
+
   return (
     <>
       <ApiCategories />
@@ -146,21 +159,7 @@ const PublicApi = () => {
           }}
           className="rounded"
         >
-          <Box
-            className="sticky-top d-flex justify-content-between align-items-center"
-            sx={{
-              bgcolor: "primary.main",
-              px: 3,
-              py: 1,
-            }}
-          >
-            <Typography variant="h6" color="white">
-              Signup API
-            </Typography>
-            <IconButton onClick={handleModalClose}>
-              <CloseIcon className="text-white fs-3" />
-            </IconButton>
-          </Box>
+          <Banner firstElement={firstElement} secondElement={secondElement} />
           <Box sx={{ mt: 10 }}>
             <Box
               component="form"

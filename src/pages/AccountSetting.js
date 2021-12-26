@@ -25,6 +25,9 @@ import {
 // Redux
 import { useSelector } from "react-redux";
 
+// Component
+import Banner from "../components/Banner";
+
 const AccountSetting = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [editedData, seteditedData] = React.useState({
@@ -72,20 +75,21 @@ const AccountSetting = () => {
     });
   };
 
+  // Banner elements for pass to the props
+  const firstElement = (
+    <IconButton color="inherit">
+      <KeyboardBackspaceIcon className="text-white fs-2" />
+    </IconButton>
+  );
+  const secondElement = (
+    <Button variant="contained" color="primary">
+      Save Changes
+    </Button>
+  );
+
   return (
     <>
-      <Box className="w-100 d-flex justify-content-between align-items-center px-3 py-1 bg-primary rounded mb-4 fixed-top">
-        <Box>
-          <IconButton color="inherit">
-            <KeyboardBackspaceIcon className="text-white fs-2" />
-          </IconButton>
-        </Box>
-        <Box>
-          <Button variant="contained" color="primary">
-            Save Changes
-          </Button>
-        </Box>
-      </Box>
+      <Banner firstElement={firstElement} secondElement={secondElement} />
       <Container className="d-flex" sx={{ mt: 6 }}>
         <Box
           className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-4"

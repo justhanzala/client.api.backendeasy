@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // Styled Modules
@@ -85,6 +85,7 @@ const DashboardContent = ({ children, routes }) => {
   } = useSelector((state) => state);
 
   const location = useLocation();
+  const history = useHistory();
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
 
@@ -189,8 +190,7 @@ const DashboardContent = ({ children, routes }) => {
             overflow: "auto",
           }}
         >
-          <Toolbar />
-          <Box sx={{ mx: 6, mt: 6, mb: 4 }}>
+          <Box sx={{ ml: 2, mt: 3, mb: 4 }}>
             <Grid container spacing={3}>
               {children}
             </Grid>
@@ -236,7 +236,7 @@ const DashboardContent = ({ children, routes }) => {
           <Avatar /> {userData.name}
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem onClick={() => history.push("/account-setting")}>
           <ListItemIcon>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>

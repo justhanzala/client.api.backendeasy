@@ -4,12 +4,15 @@ import Dashboard from "./pages/Dashboard";
 import ApiServices from "./pages/ApiServices";
 import PublicApi from "./pages/PublicApi";
 import PrivateApi from "./pages/PrivateApi";
+import AccountSetting from "./pages/AccountSetting";
 
 const routes = [
   {
     exact: true,
+    auth: true,
     path: "/",
-    component: Signin,
+    component: Dashboard,
+    title: "Dashboard",
   },
   {
     exact: true,
@@ -48,6 +51,11 @@ const routes = [
     path: "/api-services/private-apis",
     component: PrivateApi,
     title: "Private APIs",
+  },
+  {
+    exact: true,
+    path: "/account-setting",
+    component: AccountSetting,
   },
 ];
 

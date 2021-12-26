@@ -8,7 +8,7 @@ import { LinearProgress, Box, CircularProgress } from "@mui/material";
 import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
 
-// Redux Actions
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { getUser as getUserAction } from "./redux/user/actions";
 

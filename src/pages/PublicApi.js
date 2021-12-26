@@ -13,24 +13,49 @@ import {
   IconButton,
   Popover,
   MenuItem,
+  Tooltip,
 } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+import {
+  Close as CloseIcon,
+  ModeEdit as ModeEditIcon,
+} from "@mui/icons-material";
 
 // Component
 import ApiCategories from "../components/ApiCategories";
+import Banner from "../components/Banner";
 
 const PublicApi = () => {
   const [ModalOpen, setModalOpen] = useState(false);
   const [apiData, setApiData] = useState([
     {
-      key: "name",
+      key: "fisrtName",
       type: "text",
-      label: "Name",
+      label: "First Name",
     },
     {
-      key: "email",
+      key: "lastName",
+      type: "text",
+      label: "Last Name",
+    },
+    {
+      key: "emailAdress",
       type: "email",
-      label: "Email",
+      label: "Email Address",
+    },
+    {
+      key: "phoneNumber",
+      type: "number",
+      label: "Phone Number",
+    },
+    {
+      key: "password",
+      type: "password",
+      label: "Password",
+    },
+    {
+      key: "confirmPassword",
+      type: "password",
+      label: "Confirm Password",
     },
   ]);
   const [fieldData, setFieldData] = useState({
@@ -83,6 +108,18 @@ const PublicApi = () => {
 
   const PopoverOpen = Boolean(anchorEl);
 
+  // Banner elements for pass to the props
+  const firstElement = (
+    <Typography variant="h6" color="white">
+      Signup API
+    </Typography>
+  );
+  const secondElement = (
+    <IconButton onClick={handleModalClose}>
+      <CloseIcon className="text-white fs-3" />
+    </IconButton>
+  );
+
   return (
     <>
       <ApiCategories />
@@ -122,21 +159,7 @@ const PublicApi = () => {
           }}
           className="rounded"
         >
-          <Box
-            className="sticky-top d-flex justify-content-between align-items-center"
-            sx={{
-              bgcolor: "primary.main",
-              px: 3,
-              py: 1,
-            }}
-          >
-            <Typography variant="h6" color="white">
-              Signup API
-            </Typography>
-            <IconButton onClick={handleModalClose}>
-              <CloseIcon className="text-white fs-3" />
-            </IconButton>
-          </Box>
+          <Banner firstElement={firstElement} secondElement={secondElement} />
           <Box sx={{ mt: 10 }}>
             <Box
               component="form"
@@ -179,31 +202,45 @@ const PublicApi = () => {
                       Payload
                     </Typography>
                   </Box>
-                  {apiData.map((field, idx) => {
-                    return (
-                      <Box sx={{ mb: 3 }} key={field.key}>
-                        <TextField
-                          disabled
-                          type={field.type}
-                          name={field.key}
-                          label={field.label}
-                          variant="outlined"
-                          className="me-2"
-                          fullWidth
-                          InputProps={{
-                            endAdornment: (
-                              <CloseIcon
-                                className="cursorPointer"
-                                onClick={() => handleRemoveApiData(idx)}
-                              />
-                            ),
-                          }}
-                        />
-                      </Box>
-                    );
-                  })}
+                  {apiData.map((field, idx) => (
+                    <Box sx={{ mb: 3 }} key={field.key}>
+                      <TextField
+                        disabled
+                        type={field.type}
+                        name={field.key}
+                        label={field.label}
+                        variant="outlined"
+                        className="me-2"
+                        fullWidth
+                        InputProps={{
+                          endAdornment: (
+                            <Box className="d-flex">
+                              <Tooltip title="Edit">
+                                <IconButton color="inherit">
+                                  <ModeEditIcon />
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip title="Delete">
+                                <IconButton
+                                  onClick={() => handleRemoveApiData(idx)}
+                                  color="inherit"
+                                >
+                                  <CloseIcon />
+                                </IconButton>
+                              </Tooltip>
+                            </Box>
+                          ),
+                        }}
+                      />
+                    </Box>
+                  ))}
                   <Box className="d-flex justify-content-between align-items-center">
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      disabled={!apiData.length}
+                    >
                       Submit
                     </Button>
                     <Button
@@ -285,6 +322,9 @@ const PublicApi = () => {
                             color="primary"
                             className="text-capitalize"
                             onClick={handleAddApiData}
+                            disabled={
+                              !fieldData.key.trim() || !fieldData.label.trim()
+                            }
                           >
                             Add
                           </Button>

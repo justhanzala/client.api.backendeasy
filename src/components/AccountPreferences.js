@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -6,28 +7,30 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 const AccountPreferences = () => {
+  const location = useLocation();
   const Links = [
     {
       click: () => console.log("Clicked"),
       title: "Profile",
-      path: "/",
+      path: "/profile",
     },
     {
       click: () => console.log("Clicked"),
       title: "Account Setting",
-      path: "/",
+      path: "/account-setting",
     },
     {
       click: () => console.log("Clicked"),
       title: "Database Setting",
-      path: "/",
+      path: "/database-setting",
     },
     {
       click: () => console.log("Clicked"),
-      title: "Product",
-      path: "/",
+      title: "Help",
+      path: "/help",
     },
   ];
 
@@ -45,9 +48,17 @@ const AccountPreferences = () => {
         <Divider />
         <Box>
           {Links.map(({ click, title, path }, i) => (
-            <ListItem button onClick={click} key={i}>
-              <ListItemText primary={title} className="ms-0" />
-            </ListItem>
+            <Link to={path} className="text-decoration-none text-dark" key={i}>
+              <ListItem
+                button
+                onClick={click}
+                sx={{
+                  bgcolor: location.pathname === path ? grey[300] : "white",
+                }}
+              >
+                <ListItemText primary={title} className="ms-0" />
+              </ListItem>
+            </Link>
           ))}
         </Box>
       </Box>

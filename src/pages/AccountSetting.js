@@ -73,7 +73,7 @@ const AccountSetting = () => {
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
           <Box className="py-3 px-2">
             <Typography variant="h5" color="black">
-              Profile information
+              Update Information
             </Typography>
           </Box>
           <Divider />

@@ -37,8 +37,8 @@ const AccountPreferences = () => {
   return (
     <>
       <Box
-        className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-4"
-        sx={{ height: "90vh", position: "sticky", top: "1.5rem", zIndex: 6 }}
+        className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-5"
+        sx={{ height: "90vh", position: "sticky", top: "6rem", zIndex: 6 }}
       >
         <Box className="px-3 py-3">
           <Typography variant="p" color="black">

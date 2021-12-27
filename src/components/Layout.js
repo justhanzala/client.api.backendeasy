@@ -232,7 +232,7 @@ const DashboardContent = ({ children, routes }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => history.push("/profile")}>
           <Avatar /> {userData.name}
         </MenuItem>
         <Divider />

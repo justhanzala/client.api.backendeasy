@@ -1,12 +1,10 @@
-import React from "react";
+import { useState } from "react";
 
 // Styled Components
 import {
   Container,
   Box,
   Typography,
-  ListItem,
-  ListItemText,
   Divider,
   Button,
   IconButton,
@@ -30,8 +28,10 @@ import Banner from "../components/Banner";
 import AccountPreferences from "../components/AccountPreferences";
 
 const AccountSetting = () => {
-  const [expanded, setExpanded] = React.useState(false);
-  const [editedData, seteditedData] = React.useState({
+  const [expandedEditAccordion, setExpandedEditAccordion] = useState(true);
+  const [expendedChangePasswordAccordion, setExpendedChangePasswordAccordion] =
+    useState(false);
+  const [editedData, seteditedData] = useState({
     name: "",
     role: "",
     emailAddress: "",
@@ -41,8 +41,24 @@ const AccountSetting = () => {
     user: { userData },
   } = useSelector((state) => state);
 
-  const handleAccordionChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+  const handleAccordion = (panel) => (event, isExpanded) => {
+    setExpandedEditAccordion(isExpanded ? panel : false);
+    if (
+      expendedChangePasswordAccordion === true ||
+      expandedEditAccordion === true
+    ) {
+      setExpendedChangePasswordAccordion(false);
+    }
+  };
+
+  const handleChangePasswordAccordion = (panel) => (event, isExpanded) => {
+    setExpendedChangePasswordAccordion(isExpanded ? panel : false);
+    if (
+      expandedEditAccordion === true ||
+      expendedChangePasswordAccordion === true
+    ) {
+      setExpandedEditAccordion(false);
+    }
   };
 
   const handleOnChange = (e) => {
@@ -60,7 +76,15 @@ const AccountSetting = () => {
     </IconButton>
   );
   const secondElement = (
-    <Button variant="contained" color="primary">
+    <Button
+      variant="contained"
+      color="primary"
+      disabled={
+        !editedData.name.length ||
+        !editedData.emailAddress.length ||
+        !editedData.phoneNumber.length
+      }
+    >
       Save Changes
     </Button>
   );
@@ -79,13 +103,10 @@ const AccountSetting = () => {
           <Divider />
           <Box className="mt-3">
             <Accordion
-              expanded={expanded === "panel1"}
-              onChange={handleAccordionChange("panel1")}
+              expanded={expandedEditAccordion === true}
+              onChange={handleAccordion(true)}
             >
-              <AccordionSummary
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
+              <AccordionSummary>
                 <Box className="d-flex justify-content-between align-items-center w-100">
                   <Box className="d-flex flex-column">
                     <Box className="mb-2">
@@ -98,8 +119,8 @@ const AccountSetting = () => {
                     </Typography>
                   </Box>
                   <IconButton color="inherit">
-                    {expanded === false && <ExpandMoreIcon />}
-                    {expanded === "panel1" && <ExpandLessIcon />}
+                    {expandedEditAccordion === false && <ExpandMoreIcon />}
+                    {expandedEditAccordion === true && <ExpandLessIcon />}
                   </IconButton>
                 </Box>
               </AccordionSummary>
@@ -179,7 +200,73 @@ const AccountSetting = () => {
               </AccordionDetails>
             </Accordion>
           </Box>
-          <Divider />
+          <Divider className="my-3" />
+          <Box className="mt-3">
+            <Accordion
+              expanded={expendedChangePasswordAccordion === true}
+              onChange={handleChangePasswordAccordion(true)}
+            >
+              <AccordionSummary
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Box className="d-flex justify-content-between align-items-center w-100">
+                  <Box className="d-flex flex-column">
+                    <Box className="mb-2">
+                      <Typography variant="h6" color="black">
+                        Password
+                      </Typography>
+                    </Box>
+                    <Typography variant="p" color="GrayText">
+                      Change Your Password
+                    </Typography>
+                  </Box>
+                  <IconButton color="inherit">
+                    {expendedChangePasswordAccordion === false && (
+                      <ExpandMoreIcon />
+                    )}
+                    {expendedChangePasswordAccordion === true && (
+                      <ExpandLessIcon />
+                    )}
+                  </IconButton>
+                </Box>
+              </AccordionSummary>
+              <hr className="text-dark mt-0" />
+              <AccordionDetails>
+                <Box className="mb-4">
+                  <TextField
+                    type="password"
+                    name="currentPassword"
+                    variant="outlined"
+                    label="Current Password"
+                    required
+                    fullWidth
+                  />
+                </Box>
+                <Box className="mb-4">
+                  <TextField
+                    type="password"
+                    name="newPassword"
+                    variant="outlined"
+                    label="New Password"
+                    required
+                    fullWidth
+                  />
+                </Box>
+                <Box className="mb-4">
+                  <TextField
+                    type="password"
+                    name="confirmPassword"
+                    variant="outlined"
+                    label="Confirm Password"
+                    required
+                    fullWidth
+                  />
+                </Box>
+              </AccordionDetails>
+            </Accordion>
+          </Box>
+          <Divider className="my-3" />
         </Box>
       </Container>
     </>

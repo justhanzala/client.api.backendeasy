@@ -20,6 +20,7 @@ import {
   MenuItem,
   ListItemIcon,
   Tooltip,
+  CardMedia,
 } from "@mui/material";
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -30,6 +31,8 @@ import {
 
 // Component
 import SidebarItem from "./SidebarItem";
+
+import ExampleImage from "../assets/img/ExampleImg.png";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -148,7 +151,13 @@ const DashboardContent = ({ children, routes }) => {
                 </Typography>
                 <Tooltip title="My Profile">
                   <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                    <Avatar>{userData.name.charAt(0).toUpperCase()}</Avatar>
+                    <CardMedia
+                      component="img"
+                      image={ExampleImage}
+                      height="50"
+                      width="50"
+                      className="rounded-pill"
+                    />
                   </IconButton>
                 </Tooltip>
               </Toolbar>

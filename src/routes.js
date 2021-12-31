@@ -5,6 +5,7 @@ import ApiServices from "./pages/ApiServices";
 import PublicApi from "./pages/PublicApi";
 import PrivateApi from "./pages/PrivateApi";
 import AccountSetting from "./pages/AccountSetting";
+import Profile from "./pages/Profile";
 
 const routes = [
   {
@@ -56,6 +57,11 @@ const routes = [
     exact: true,
     path: "/account-setting",
     component: AccountSetting,
+  },
+  {
+    exact: true,
+    path: "/profile",
+    component: Profile,
   },
 ];
 

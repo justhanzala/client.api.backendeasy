@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Styled Modules
 import {
@@ -11,11 +12,9 @@ import {
   CardMedia,
   CardActionArea,
   CardContent,
+  Button,
 } from "@mui/material";
-import {
-  KeyboardBackspace as KeyboardBackspaceIcon,
-  ExpandMore as ExpandMoreIcon,
-} from "@mui/icons-material";
+import { KeyboardBackspace as KeyboardBackspaceIcon } from "@mui/icons-material";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -49,13 +48,21 @@ const Profile = () => {
       <Container className="d-flex justify-content-center" sx={{ mt: 7 }}>
         <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
-          <Box className="py-3 px-2">
+          <Box className="py-3 px-2 d-flex justify-content-between">
             <Typography variant="h5" color="black">
               Profile Information
             </Typography>
+            <Link
+              className="text-white text-decoration-none"
+              to="/account-setting"
+            >
+              <Button variant="contained" color="primary">
+                Edit
+              </Button>
+            </Link>
           </Box>
-          <Divider className="my-3" />
-          <Box className="d-flex justify-content-center align-items-center">
+          <Divider className="mb-3" />
+          <Box className="d-flex justify-content-center align-items-center w-100">
             <CardActionArea sx={{ height: "200px", width: "200px" }}>
               <CardMedia
                 component="img"

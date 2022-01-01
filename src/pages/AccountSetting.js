@@ -92,7 +92,7 @@ const AccountSetting = () => {
   return (
     <>
       <Banner firstElement={firstElement} secondElement={secondElement} />
-      <Container className="d-flex" sx={{ mt: 6 }}>
+      <Container className="d-flex justify-content-center" sx={{ mt: 6 }}>
         <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
           <Box className="py-3 px-2">

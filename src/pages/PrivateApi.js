@@ -1,6 +1,6 @@
 import React from "react";
 
-// Styled Modules
+// Styled Components
 import {
   Card,
   CardActionArea,

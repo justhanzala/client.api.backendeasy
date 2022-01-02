@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-// Styled Modules
+// Styled Components
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   AppBar as MuiAppBar,
@@ -32,6 +31,10 @@ import {
 // Component
 import SidebarItem from "./SidebarItem";
 
+// Redux
+import { useSelector } from "react-redux";
+
+// Image
 import ExampleImage from "../assets/img/ExampleImg.png";
 
 const drawerWidth = 240;
@@ -206,7 +209,7 @@ const DashboardContent = ({ children, routes }) => {
           </Box>
         </Box>
       </Box>
-      {/* Profile Dropwdown */}
+      {/* Profile Dropwdown Menu */}
       <Menu
         anchorEl={anchorEl}
         open={profileDropdownOpen}

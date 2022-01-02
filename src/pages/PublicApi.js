@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// Styled Modules
+// Styled Components
 import {
   Card,
   CardActionArea,

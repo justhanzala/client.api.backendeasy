@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useLocation, Redirect } from "react-router-dom";
 
-// Styled Modules
+// Styled Components
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Avatar,

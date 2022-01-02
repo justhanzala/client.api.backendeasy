@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-// Styled Modules
+// Styled Components
 import { Box, Button, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 

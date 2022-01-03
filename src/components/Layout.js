@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 // Styled Components
@@ -95,12 +95,12 @@ const DashboardContent = ({ children, routes }) => {
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const profileDropdownOpen = Boolean(anchorEl);
 
   const handleClick = (event) => {

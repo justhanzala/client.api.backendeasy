@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-// Styled Modules
+// Styled Components
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import {
@@ -13,7 +13,7 @@ const SidebarItem = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const Menus = [
+  const MenuItems = [
     {
       icon: <DashboardIcon />,
       title: "Dashboard",
@@ -30,7 +30,7 @@ const SidebarItem = () => {
 
   return (
     <>
-      {Menus.map(({ icon, title, path, click }, i) => (
+      {MenuItems.map(({ icon, title, path, click }, i) => (
         <ListItem
           key={i}
           button

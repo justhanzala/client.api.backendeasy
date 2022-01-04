@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-// Styled Modules
+// Styled Components
 import {
   Accordion,
   AccordionDetails,

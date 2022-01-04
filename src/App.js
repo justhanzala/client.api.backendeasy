@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-// Styled Modules
+// Styled Components
 import { LinearProgress, Box, CircularProgress } from "@mui/material";
 
 // Components

@@ -1,7 +1,7 @@
-import * as React from "react";
+import { useState } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 
-// Styled Modules
+// Styled Components
 import {
   Avatar,
   Button,
@@ -27,7 +27,7 @@ import Copyright from "../components/Copyright";
 const theme = createTheme();
 
 const SignUp = () => {
-  const [role, setRole] = React.useState("");
+  const [role, setRole] = useState("");
   const dispatch = useDispatch();
   const location = useLocation();
   const {

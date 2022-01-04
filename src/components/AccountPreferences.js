@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+
+// Styled Components
 import {
   Box,
   Typography,
@@ -13,22 +15,18 @@ const AccountPreferences = () => {
   const location = useLocation();
   const Links = [
     {
-      click: () => console.log("Clicked"),
       title: "Profile",
       path: "/profile",
     },
     {
-      click: () => console.log("Clicked"),
       title: "Account Setting",
       path: "/account-setting",
     },
     {
-      click: () => console.log("Clicked"),
       title: "Database Setting",
       path: "/database-setting",
     },
     {
-      click: () => console.log("Clicked"),
       title: "Help",
       path: "/help",
     },
@@ -37,8 +35,8 @@ const AccountPreferences = () => {
   return (
     <>
       <Box
-        className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-5"
-        sx={{ height: "90vh", position: "sticky", top: "6rem", zIndex: 6 }}
+        className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-3"
+        sx={{ height: "90vh", position: "sticky", top: "5rem", zIndex: 6 }}
       >
         <Box className="px-3 py-3">
           <Typography variant="p" color="black">

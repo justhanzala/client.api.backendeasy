@@ -9,12 +9,14 @@ import {
   IconButton,
   Divider,
   Card,
-  CardMedia,
   CardActionArea,
   CardContent,
   Button,
 } from "@mui/material";
-import { KeyboardBackspace as KeyboardBackspaceIcon } from "@mui/icons-material";
+import {
+  KeyboardBackspace as KeyboardBackspaceIcon,
+  AccountBox as AccountBoxIcon,
+} from "@mui/icons-material";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -22,9 +24,6 @@ import { useSelector } from "react-redux";
 // Components
 import AccountPreferences from "../components/AccountPreferences";
 import Banner from "../components/Banner";
-
-// Image
-import ExampleImage from "../assets/img/ExampleImg.png";
 
 const Profile = () => {
   // Get user data from redux store
@@ -57,19 +56,14 @@ const Profile = () => {
               to="/account-setting"
             >
               <Button variant="contained" color="primary">
-                Edit
+                Edit Information
               </Button>
             </Link>
           </Box>
           <Divider className="mb-3" />
           <Box className="d-flex justify-content-center align-items-center w-100">
             <CardActionArea sx={{ height: "200px", width: "200px" }}>
-              <CardMedia
-                component="img"
-                image={ExampleImage}
-                alt="Img"
-                className="rounded"
-              />
+              <AccountBoxIcon className="w-100 h-100" />
             </CardActionArea>
           </Box>
           <Divider className="my-3" />

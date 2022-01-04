@@ -26,6 +26,7 @@ import {
   ChevronRight as ChevronRightIcon,
   Settings as SettingsIcon,
   Logout as LogoutIcon,
+  AccountBox as AccountBoxIcon,
 } from "@mui/icons-material";
 
 // Component
@@ -33,9 +34,6 @@ import SidebarItem from "./SidebarItem";
 
 // Redux
 import { useSelector } from "react-redux";
-
-// Image
-import ExampleImage from "../assets/img/ExampleImg.png";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -154,13 +152,7 @@ const DashboardContent = ({ children, routes }) => {
                 </Typography>
                 <Tooltip title="My Profile">
                   <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                    <CardMedia
-                      component="img"
-                      image={ExampleImage}
-                      height="50"
-                      width="50"
-                      className="rounded-pill"
-                    />
+                    <AccountBoxIcon className="fs-1 text-white" />
                   </IconButton>
                 </Tooltip>
               </Toolbar>
@@ -245,7 +237,7 @@ const DashboardContent = ({ children, routes }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={() => history.push("/profile")}>
-          <Avatar /> {userData.name}
+          <AccountBoxIcon className="fs-1 me-2" /> {userData.name}
         </MenuItem>
         <Divider />
         <MenuItem onClick={() => history.push("/account-setting")}>

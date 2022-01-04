@@ -13,11 +13,13 @@ import {
   AccordionDetails,
   TextField,
   MenuItem,
+  CardActionArea,
 } from "@mui/material";
 import {
   KeyboardBackspace as KeyboardBackspaceIcon,
   ExpandMore as ExpandMoreIcon,
   ExpandLess as ExpandLessIcon,
+  AccountBox as AccountBoxIcon,
 } from "@mui/icons-material";
 
 // Redux
@@ -100,7 +102,13 @@ const AccountSetting = () => {
               Update Information
             </Typography>
           </Box>
-          <Divider />
+          <Divider className="mb-3" />
+          <Box className="d-flex justify-content-center align-items-center w-100">
+            <CardActionArea sx={{ height: "200px", width: "200px" }}>
+              <AccountBoxIcon className="w-100 h-100" />
+            </CardActionArea>
+          </Box>
+          <Divider className="my-3" />
           <Box className="mt-3">
             <Accordion
               expanded={expandedEditAccordion === true}
@@ -266,7 +274,6 @@ const AccountSetting = () => {
               </AccordionDetails>
             </Accordion>
           </Box>
-          <Divider className="my-3" />
         </Box>
       </Container>
     </>

@@ -14,13 +14,15 @@ import {
   AccordionDetails,
   TextField,
   MenuItem,
-  CardActionArea,
+  CardMedia,
 } from "@mui/material";
 import {
   KeyboardBackspace as KeyboardBackspaceIcon,
   ExpandMore as ExpandMoreIcon,
   ExpandLess as ExpandLessIcon,
-  AccountBox as AccountBoxIcon,
+  AccountCircle as AccountCircleIcon,
+  CameraAlt as CameraAltIcon,
+  AddAPhoto as AddAPhotoIcon,
 } from "@mui/icons-material";
 
 // Redux
@@ -55,6 +57,7 @@ const UpdateInformation = () => {
 
       dispatch(uploadProfileAction(formData));
     }
+    // eslint-disable-next-line
   }, [updatedImage]);
 
   const handleAccordion = (panel) => (event, isExpanded) => {
@@ -107,18 +110,36 @@ const UpdateInformation = () => {
           </Box>
           <Divider className="mb-3" />
           <Box className="d-flex justify-content-center align-items-center w-100">
-            <label htmlFor="update-profile">
+            <Box
+              sx={{ height: "250px", width: "250px" }}
+              className="position-relative mb-3"
+            >
               {userData?.profile ? (
-                <img
-                  width="250"
-                  height="200"
-                  style={{ borderRadius: "50%" }}
-                  src={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
-                />
+                <>
+                  <CardMedia
+                    component="img"
+                    className="rounded-circle w-100 h-100 position-relative"
+                    src={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                  />
+                  <label
+                    htmlFor="update-profile"
+                    className="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-dark"
+                  >
+                    <CameraAltIcon />
+                  </label>
+                </>
               ) : (
-                <AccountBoxIcon className="w-100 h-100" />
+                <>
+                  <AccountCircleIcon className="rounded-circle w-100 h-100 position-relative" />
+                  <label
+                    htmlFor="update-profile"
+                    className="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-dark"
+                  >
+                    <AddAPhotoIcon />
+                  </label>
+                </>
               )}
-            </label>
+            </Box>
             <input
               id="update-profile"
               type="file"

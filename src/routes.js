@@ -6,7 +6,7 @@ import ApiServices from "./pages/ApiServices";
 import PublicApi from "./pages/PublicApi";
 import PrivateApi from "./pages/PrivateApi";
 import Profile from "./pages/Profile";
-import AccountSetting from "./pages/AccountSetting";
+import UpdateInformation from "./pages/UpdateInformation";
 import DatabaseSetting from "./pages/DatabaseSetting";
 
 const routes = [
@@ -62,8 +62,8 @@ const routes = [
   },
   {
     exact: true,
-    path: "/account-setting",
-    component: AccountSetting,
+    path: "/update-information",
+    component: UpdateInformation,
   },
   {
     exact: true,

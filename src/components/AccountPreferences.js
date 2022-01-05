@@ -19,8 +19,8 @@ const AccountPreferences = () => {
       path: "/profile",
     },
     {
-      title: "Account Setting",
-      path: "/account-setting",
+      title: "Update Information",
+      path: "/update-information",
     },
     {
       title: "Database Setting",

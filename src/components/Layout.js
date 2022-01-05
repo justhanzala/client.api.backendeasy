@@ -5,7 +5,6 @@ import { useLocation, useHistory } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   AppBar as MuiAppBar,
-  Avatar,
   Box,
   Divider,
   Grid,
@@ -19,7 +18,6 @@ import {
   MenuItem,
   ListItemIcon,
   Tooltip,
-  CardMedia,
 } from "@mui/material";
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -240,12 +238,6 @@ const DashboardContent = ({ children, routes }) => {
           <AccountBoxIcon className="fs-1 me-2" /> {userData.name}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={() => history.push("/account-setting")}>
-          <ListItemIcon>
-            <SettingsIcon fontSize="small" />
-          </ListItemIcon>
-          Account Settings
-        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <SettingsIcon fontSize="small" />

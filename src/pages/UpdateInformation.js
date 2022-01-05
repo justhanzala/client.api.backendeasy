@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Styled Components
 import {
@@ -23,13 +23,15 @@ import {
 } from "@mui/icons-material";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { uploadProfile as uploadProfileAction } from "../redux/user/actions";
 
 // Components
 import Banner from "../components/Banner";
 import AccountPreferences from "../components/AccountPreferences";
 
-const AccountSetting = () => {
+const UpdateInformation = () => {
+  const dispatch = useDispatch();
   const [expandedEditAccordion, setExpandedEditAccordion] = useState(true);
   const [expendedChangePasswordAccordion, setExpendedChangePasswordAccordion] =
     useState(false);
@@ -39,9 +41,20 @@ const AccountSetting = () => {
     emailAddress: "",
     phoneNumber: "",
   });
+  const [updatedImage, setUpdatedImage] = useState(null);
   const {
     user: { userData },
   } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (updatedImage !== null) {
+      const formData = new FormData();
+      formData.append("profile", updatedImage);
+      formData.append("_id", userData?._id);
+
+      dispatch(uploadProfileAction(formData));
+    }
+  }, [updatedImage]);
 
   const handleAccordion = (panel) => (event, isExpanded) => {
     setExpandedEditAccordion(isExpanded ? panel : false);
@@ -104,9 +117,25 @@ const AccountSetting = () => {
           </Box>
           <Divider className="mb-3" />
           <Box className="d-flex justify-content-center align-items-center w-100">
-            <CardActionArea sx={{ height: "200px", width: "200px" }}>
-              <AccountBoxIcon className="w-100 h-100" />
-            </CardActionArea>
+            <label htmlFor="update-profile">
+              {userData?.profile ? (
+                <img
+                  width="250"
+                  height="200"
+                  style={{ borderRadius: "50%" }}
+                  src={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                />
+              ) : (
+                <AccountBoxIcon className="w-100 h-100" />
+              )}
+            </label>
+            <input
+              id="update-profile"
+              type="file"
+              className="d-none"
+              accept="image/*"
+              onChange={(e) => setUpdatedImage(e.target.files[0])}
+            />
           </Box>
           <Divider className="my-3" />
           <Box className="mt-3">
@@ -280,4 +309,4 @@ const AccountSetting = () => {
   );
 };
 
-export default AccountSetting;
+export default UpdateInformation;

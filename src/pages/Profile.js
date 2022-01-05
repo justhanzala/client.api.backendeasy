@@ -41,6 +41,7 @@ const Profile = () => {
       Back To Dashboard
     </Typography>
   );
+
   return (
     <>
       <Banner firstElement={firstElement} secondElement={secondElement} />
@@ -49,21 +50,31 @@ const Profile = () => {
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
           <Box className="py-3 px-2 d-flex justify-content-between">
             <Typography variant="h5" color="black">
-              Profile Information
+              Profile
             </Typography>
             <Link
               className="text-white text-decoration-none"
-              to="/account-setting"
+              to="/update-information"
             >
               <Button variant="contained" color="primary">
-                Edit Information
+                Update Information
               </Button>
             </Link>
           </Box>
           <Divider className="mb-3" />
           <Box className="d-flex justify-content-center align-items-center w-100">
             <CardActionArea sx={{ height: "200px", width: "200px" }}>
-              <AccountBoxIcon className="w-100 h-100" />
+              {userData?.profile ? (
+                // If user has image thin code will run
+                <img
+                  width="250"
+                  height="200"
+                  src={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                />
+              ) : (
+                // If user don't have image thin code will run
+                <AccountBoxIcon className="w-100 h-100" />
+              )}
             </CardActionArea>
           </Box>
           <Divider className="my-3" />

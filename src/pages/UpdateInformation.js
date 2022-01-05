@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Styled Components
 import {
@@ -86,27 +87,16 @@ const UpdateInformation = () => {
 
   // Banner elements for pass to the props
   const firstElement = (
-    <IconButton color="inherit">
-      <KeyboardBackspaceIcon className="text-white fs-2" />
-    </IconButton>
-  );
-  const secondElement = (
-    <Button
-      variant="contained"
-      color="primary"
-      disabled={
-        !editedData.name.length ||
-        !editedData.emailAddress.length ||
-        !editedData.phoneNumber.length
-      }
-    >
-      Save Changes
-    </Button>
+    <Link className="text-white text-decoration-none" to="/">
+      <IconButton color="inherit">
+        <KeyboardBackspaceIcon className="text-white fs-2" />
+      </IconButton>
+    </Link>
   );
 
   return (
     <>
-      <Banner firstElement={firstElement} secondElement={secondElement} />
+      <Banner firstElement={firstElement} />
       <Container className="d-flex justify-content-center" sx={{ mt: 6 }}>
         <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>

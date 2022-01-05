@@ -16,19 +16,19 @@ const AccountPreferences = () => {
   const Links = [
     {
       title: "Profile",
-      path: "/profile",
+      path: "/user/profile",
     },
     {
       title: "Update Information",
-      path: "/update-information",
+      path: "/user/update-information",
     },
     {
       title: "Database Setting",
-      path: "/database-setting",
+      path: "/user/database-setting",
     },
     {
       title: "Help",
-      path: "/help",
+      path: "/user/help",
     },
   ];
 
@@ -40,7 +40,7 @@ const AccountPreferences = () => {
       >
         <Box className="px-3 py-3">
           <Typography variant="p" color="black">
-            Account preferences
+            Account Preferences
           </Typography>
         </Box>
         <Divider />

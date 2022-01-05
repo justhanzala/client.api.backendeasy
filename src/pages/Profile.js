@@ -32,19 +32,16 @@ const Profile = () => {
   } = useSelector((state) => state);
 
   const firstElement = (
-    <IconButton color="inherit">
-      <KeyboardBackspaceIcon className="text-white fs-2" />
-    </IconButton>
-  );
-  const secondElement = (
-    <Typography variant="h6" color="white">
-      Back To Dashboard
-    </Typography>
+    <Link className="text-white text-decoration-none" to="/">
+      <IconButton color="inherit">
+        <KeyboardBackspaceIcon className="text-white fs-2" />
+      </IconButton>
+    </Link>
   );
 
   return (
     <>
-      <Banner firstElement={firstElement} secondElement={secondElement} />
+      <Banner firstElement={firstElement} />
       <Container className="d-flex justify-content-center" sx={{ mt: 7 }}>
         <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
@@ -54,7 +51,7 @@ const Profile = () => {
             </Typography>
             <Link
               className="text-white text-decoration-none"
-              to="/update-information"
+              to="/user/update-information"
             >
               <Button variant="contained" color="primary">
                 Update Information

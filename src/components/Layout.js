@@ -90,6 +90,8 @@ const DashboardContent = ({ children, routes }) => {
   const history = useHistory();
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
+  const { pathname } = location;
+  console.log("pathname==========", pathname);
 
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
@@ -116,7 +118,7 @@ const DashboardContent = ({ children, routes }) => {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        {loggedIn && (
+        {loggedIn && !pathname.includes("user") && (
           <>
             <AppBar position="absolute" open={open}>
               <Toolbar
@@ -234,7 +236,7 @@ const DashboardContent = ({ children, routes }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={() => history.push("/profile")}>
+        <MenuItem onClick={() => history.push("/user/profile")}>
           <AccountBoxIcon className="fs-1 me-2" /> {userData.name}
         </MenuItem>
         <Divider />
@@ -242,7 +244,7 @@ const DashboardContent = ({ children, routes }) => {
           <ListItemIcon>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          Account Preferences
         </MenuItem>
         <MenuItem onClick={LogoutAction}>
           <ListItemIcon>

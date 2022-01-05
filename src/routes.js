@@ -57,17 +57,17 @@ const routes = [
   },
   {
     exact: true,
-    path: "/profile",
+    path: "/user/profile",
     component: Profile,
   },
   {
     exact: true,
-    path: "/update-information",
+    path: "/user/update-information",
     component: UpdateInformation,
   },
   {
     exact: true,
-    path: "/database-setting",
+    path: "/user/database-setting",
     component: DatabaseSetting,
   },
 ];

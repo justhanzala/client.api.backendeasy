@@ -62,15 +62,10 @@ const DatabaseSetting = () => {
       </IconButton>
     </Link>
   );
-  const secondElement = (
-    <Typography variant="h6" color="white">
-      Back To Dashboard
-    </Typography>
-  );
 
   return (
     <>
-      <Banner firstElement={firstElement} secondElement={secondElement} />
+      <Banner firstElement={firstElement} />
       <Container className="d-flex justify-content-center" sx={{ mt: 6 }}>
         <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>

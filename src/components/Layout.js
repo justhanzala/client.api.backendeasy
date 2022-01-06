@@ -18,6 +18,7 @@ import {
   MenuItem,
   ListItemIcon,
   Tooltip,
+  CardMedia,
 } from "@mui/material";
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -88,10 +89,9 @@ const DashboardContent = ({ children, routes }) => {
 
   const location = useLocation();
   const history = useHistory();
+  const { pathname } = location;
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
-  const { pathname } = location;
-  console.log("pathname==========", pathname);
 
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
@@ -126,20 +126,20 @@ const DashboardContent = ({ children, routes }) => {
                   pr: "24px", // keep right padding when drawer closed
                 }}
               >
-                <Tooltip title="Open">
-                  <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleDrawer}
-                    sx={{
-                      marginRight: "36px",
-                      ...(open && { display: "none" }),
-                    }}
-                  >
-                    <ChevronRightIcon sx={{ color: "white" }} />
-                  </IconButton>
-                </Tooltip>
+                {!open && (
+                  <Tooltip title="Open">
+                    <IconButton
+                      edge="start"
+                      color="inherit"
+                      onClick={toggleDrawer}
+                      sx={{
+                        marginRight: "36px",
+                      }}
+                    >
+                      <ChevronRightIcon sx={{ color: "white" }} />
+                    </IconButton>
+                  </Tooltip>
+                )}
                 <Typography
                   component="h1"
                   variant="h6"
@@ -151,9 +151,27 @@ const DashboardContent = ({ children, routes }) => {
                   {title}
                 </Typography>
                 <Tooltip title="My Profile">
-                  <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                    <AccountBoxIcon className="fs-1 text-white" />
-                  </IconButton>
+                  {!userData?.profile ? (
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2, height: "50px", width: "50px" }}
+                    >
+                      <CardMedia
+                        component="img"
+                        className="rounded-pill w-100 h-100 position-relative"
+                        image={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                      />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                    >
+                      <AccountBoxIcon className="fs-1 text-white" />
+                    </IconButton>
+                  )}
                 </Tooltip>
               </Toolbar>
             </AppBar>
@@ -237,7 +255,22 @@ const DashboardContent = ({ children, routes }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={() => history.push("/user/profile")}>
-          <AccountBoxIcon className="fs-1 me-2" /> {userData.name}
+          {userData?.profile ? (
+            <>
+              <Box sx={{ width: "45px", height: "45px" }} className="me-2">
+                <CardMedia
+                  component="img"
+                  className="rounded-pill w-100 h-100 position-relative"
+                  image={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                />
+              </Box>
+              {userData.name}
+            </>
+          ) : (
+            <>
+              <AccountBoxIcon className="fs-1 me-2 text-dark" /> {userData.name}
+            </>
+          )}
         </MenuItem>
         <Divider />
         <MenuItem>

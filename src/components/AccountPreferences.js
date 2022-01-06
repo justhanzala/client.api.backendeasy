@@ -35,8 +35,14 @@ const AccountPreferences = () => {
   return (
     <>
       <Box
-        className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-3"
-        sx={{ height: "90vh", position: "sticky", top: "5rem", zIndex: 6 }}
+        className="d-flex flex-column bg-light me-3 rounded overflow-auto"
+        sx={{
+          height: "80vh",
+          position: "sticky",
+          top: "6rem",
+          zIndex: 6,
+          mt: "2rem",
+        }}
       >
         <Box className="px-3 py-3">
           <Typography variant="p" color="black">
@@ -45,11 +51,14 @@ const AccountPreferences = () => {
         </Box>
         <Divider />
         <Box>
-          {Links.map(({ click, title, path }, i) => (
-            <Link to={path} className="text-decoration-none text-dark" key={i}>
+          {Links.map(({ title, path }, index) => (
+            <Link
+              to={path}
+              className="text-decoration-none text-dark"
+              key={index}
+            >
               <ListItem
                 button
-                onClick={click}
                 sx={{
                   bgcolor: location.pathname === path ? grey[300] : "white",
                 }}

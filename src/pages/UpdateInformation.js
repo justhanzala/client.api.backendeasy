@@ -7,7 +7,6 @@ import {
   Box,
   Typography,
   Divider,
-  Button,
   IconButton,
   Accordion,
   AccordionSummary,
@@ -192,7 +191,7 @@ const UpdateInformation = () => {
                     name="role"
                     onChange={handleOnChange}
                     variant="outlined"
-                    defaultValue={userData.role}
+                    defaultValue={userData.role || ""}
                     fullWidth
                     required
                   >

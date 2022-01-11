@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // Styled Components
@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
   Button,
+  MenuItem,
 } from "@mui/material";
 import {
   KeyboardBackspace as KeyboardBackspaceIcon,
@@ -31,7 +32,7 @@ const DatabaseSetting = () => {
   const [expandedAddDatabaseAccordion, setExpandedAddDatabaseAccordion] =
     useState(false);
   const [database, setDatabase] = useState(
-    "mongodb://backendeasy:iygTAobX17WWoEKB@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0-shard-00-01.ibnqj.mongodb.net:27017,cluster0-shard-00-02.ibnqj.mongodb.net:27017/dev_api_backendeasy?ssl=true&replicaSet=atlas-12bwaa-shard-0&authSource=admin&retryWrites=true&w=majority"
+    "mongodb://exampleUser:examplePassword@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0"
   );
 
   const handleDatabaseAccordion = (panel) => (event, isExpanded) => {
@@ -63,6 +64,15 @@ const DatabaseSetting = () => {
     </Link>
   );
 
+  const availableDatabases = [
+    "mongodb://exampleUser:examplePassword2@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0" ===
+    database
+      ? database
+      : "mongodb://exampleUser:examplePassword2@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0",
+    "mongodb://exampleUser2:examplePassword2@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0",
+    "mongodb://exampleUser3:examplePassword@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0",
+  ];
+
   return (
     <>
       <Banner firstElement={firstElement} />
@@ -82,14 +92,10 @@ const DatabaseSetting = () => {
             >
               <AccordionSummary>
                 <Box className="d-flex justify-content-between align-items-center w-100">
-                  <Box className="d-flex flex-column">
-                    <Box className="mb-2">
-                      <Typography variant="h6" color="black">
-                        Selected Database URL
-                      </Typography>
-                    </Box>
-                    <Typography variant="p" color="GrayText">
-                      Edit Your Database URL
+                  <Box className="d-flex">
+                    <Typography variant="h6" color="InfoText">
+                      Available databases, select new database, selected
+                      database
                     </Typography>
                   </Box>
                   <IconButton color="inherit">
@@ -98,19 +104,32 @@ const DatabaseSetting = () => {
                   </IconButton>
                 </Box>
               </AccordionSummary>
-              <hr className="text-dark mt-0" />
+              <Divider className="mb-3" />
               <AccordionDetails>
                 <Box className="mb-3">
                   <TextField
                     type="text"
                     name="database"
                     variant="outlined"
-                    label={
-                      database ===
-                      "mongodb://backendeasy:iygTAobX17WWoEKB@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0-shard-00-01.ibnqj.mongodb.net:27017,cluster0-shard-00-02.ibnqj.mongodb.net:27017/dev_api_backendeasy?ssl=true&replicaSet=atlas-12bwaa-shard-0&authSource=admin&retryWrites=true&w=majority"
-                        ? "SeLected Database"
-                        : "Database"
-                    }
+                    label="Database List"
+                    defaultValue={availableDatabases.slice(0, 1)}
+                    onChange={(e) => setDatabase(e.target.value)}
+                    fullWidth
+                    select
+                  >
+                    {availableDatabases.map((database, index) => (
+                      <MenuItem key={index} value={database}>
+                        {database}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+                <Box className="mb-3">
+                  <TextField
+                    type="text"
+                    name="database"
+                    variant="outlined"
+                    label="SeLected Database"
                     value={database}
                     onChange={(e) => setDatabase(e.target.value)}
                     disabled={disabledDatabaseBtn}
@@ -128,7 +147,7 @@ const DatabaseSetting = () => {
                     Edit Database
                   </Button>
                   {database !==
-                    "mongodb://backendeasy:iygTAobX17WWoEKB@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0-shard-00-01.ibnqj.mongodb.net:27017,cluster0-shard-00-02.ibnqj.mongodb.net:27017/dev_api_backendeasy?ssl=true&replicaSet=atlas-12bwaa-shard-0&authSource=admin&retryWrites=true&w=majority" && (
+                    "mongodb://exampleUser:examplePassword@cluster0-shard-00-00.ibnqj.mongodb.net:27017,cluster0" && (
                     <Button variant="contained" color="primary">
                       Save
                     </Button>
@@ -146,13 +165,8 @@ const DatabaseSetting = () => {
               <AccordionSummary>
                 <Box className="d-flex justify-content-between align-items-center w-100">
                   <Box className="d-flex flex-column">
-                    <Box className="mb-2">
-                      <Typography variant="h6" color="black">
-                        New Database URL
-                      </Typography>
-                    </Box>
-                    <Typography variant="p" color="GrayText">
-                      Add Your New Database URL
+                    <Typography variant="h6" color="InfoText">
+                      Add new database information
                     </Typography>
                   </Box>
                   <IconButton color="inherit">
@@ -165,7 +179,7 @@ const DatabaseSetting = () => {
                   </IconButton>
                 </Box>
               </AccordionSummary>
-              <hr className="text-dark mt-0" />
+              <Divider className="mb-3" />
               <AccordionDetails>
                 <Box className="mb-3">
                   <TextField

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Styled Components
@@ -16,12 +16,11 @@ import { getUser as getUserAction } from "./redux/user/actions";
 import routes from "./routes";
 
 function App() {
-  const dispatch = useDispatch();
-
   const {
     site: { apiLoading, loading },
     user: { loggedIn },
   } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const jwtToken = localStorage.getItem("token");
   useEffect(() => {

@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+// Main Component
 import App from "./App";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+// Redux
 import { Provider } from "react-redux";
 import store from "./redux";
+
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>

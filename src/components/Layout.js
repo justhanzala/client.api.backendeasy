@@ -1,11 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 // Styled Components
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   AppBar as MuiAppBar,
-  Avatar,
   Box,
   Divider,
   Grid,
@@ -19,7 +18,6 @@ import {
   MenuItem,
   ListItemIcon,
   Tooltip,
-  CardMedia,
 } from "@mui/material";
 import {
   ChevronLeft as ChevronLeftIcon,

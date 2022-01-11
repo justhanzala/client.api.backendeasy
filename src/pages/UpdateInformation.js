@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Styled Components
 import {
@@ -6,30 +7,33 @@ import {
   Box,
   Typography,
   Divider,
-  Button,
   IconButton,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   TextField,
   MenuItem,
-  CardActionArea,
+  CardMedia,
 } from "@mui/material";
 import {
   KeyboardBackspace as KeyboardBackspaceIcon,
   ExpandMore as ExpandMoreIcon,
   ExpandLess as ExpandLessIcon,
-  AccountBox as AccountBoxIcon,
+  AccountCircle as AccountCircleIcon,
+  CameraAlt as CameraAltIcon,
+  AddAPhoto as AddAPhotoIcon,
 } from "@mui/icons-material";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { uploadProfile as uploadProfileAction } from "../redux/user/actions";
 
 // Components
 import Banner from "../components/Banner";
 import AccountPreferences from "../components/AccountPreferences";
 
-const AccountSetting = () => {
+const UpdateInformation = () => {
+  const dispatch = useDispatch();
   const [expandedEditAccordion, setExpandedEditAccordion] = useState(true);
   const [expendedChangePasswordAccordion, setExpendedChangePasswordAccordion] =
     useState(false);
@@ -39,9 +43,21 @@ const AccountSetting = () => {
     emailAddress: "",
     phoneNumber: "",
   });
+  const [updatedImage, setUpdatedImage] = useState(null);
   const {
     user: { userData },
   } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (updatedImage !== null) {
+      const formData = new FormData();
+      formData.append("profile", updatedImage);
+      formData.append("_id", userData?._id);
+
+      dispatch(uploadProfileAction(formData));
+    }
+    // eslint-disable-next-line
+  }, [updatedImage]);
 
   const handleAccordion = (panel) => (event, isExpanded) => {
     setExpandedEditAccordion(isExpanded ? panel : false);
@@ -73,27 +89,16 @@ const AccountSetting = () => {
 
   // Banner elements for pass to the props
   const firstElement = (
-    <IconButton color="inherit">
-      <KeyboardBackspaceIcon className="text-white fs-2" />
-    </IconButton>
-  );
-  const secondElement = (
-    <Button
-      variant="contained"
-      color="primary"
-      disabled={
-        !editedData.name.length ||
-        !editedData.emailAddress.length ||
-        !editedData.phoneNumber.length
-      }
-    >
-      Save Changes
-    </Button>
+    <Link className="text-white text-decoration-none" to="/">
+      <IconButton color="inherit">
+        <KeyboardBackspaceIcon className="text-white fs-2" />
+      </IconButton>
+    </Link>
   );
 
   return (
     <>
-      <Banner firstElement={firstElement} secondElement={secondElement} />
+      <Banner firstElement={firstElement} />
       <Container className="d-flex justify-content-center" sx={{ mt: 6 }}>
         <AccountPreferences />
         <Box className="bg-light p-3 overflow-auto mt-4" sx={{ width: "80%" }}>
@@ -104,9 +109,43 @@ const AccountSetting = () => {
           </Box>
           <Divider className="mb-3" />
           <Box className="d-flex justify-content-center align-items-center w-100">
-            <CardActionArea sx={{ height: "200px", width: "200px" }}>
-              <AccountBoxIcon className="w-100 h-100" />
-            </CardActionArea>
+            <Box
+              sx={{ height: "250px", width: "250px" }}
+              className="position-relative mb-3"
+            >
+              {userData?.profile ? (
+                <>
+                  <CardMedia
+                    component="img"
+                    className="rounded-circle w-100 h-100 position-relative"
+                    src={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                  />
+                  <label
+                    htmlFor="update-profile"
+                    className="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-dark"
+                  >
+                    <CameraAltIcon />
+                  </label>
+                </>
+              ) : (
+                <>
+                  <AccountCircleIcon className="rounded-circle w-100 h-100 position-relative" />
+                  <label
+                    htmlFor="update-profile"
+                    className="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-dark"
+                  >
+                    <AddAPhotoIcon />
+                  </label>
+                </>
+              )}
+            </Box>
+            <input
+              id="update-profile"
+              type="file"
+              className="d-none"
+              accept="image/*"
+              onChange={(e) => setUpdatedImage(e.target.files[0])}
+            />
           </Box>
           <Divider className="my-3" />
           <Box className="mt-3">
@@ -152,7 +191,7 @@ const AccountSetting = () => {
                     name="role"
                     onChange={handleOnChange}
                     variant="outlined"
-                    defaultValue={userData.role}
+                    defaultValue={userData.role || ""}
                     fullWidth
                     required
                   >
@@ -280,4 +319,4 @@ const AccountSetting = () => {
   );
 };
 
-export default AccountSetting;
+export default UpdateInformation;

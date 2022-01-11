@@ -16,40 +16,49 @@ const AccountPreferences = () => {
   const Links = [
     {
       title: "Profile",
-      path: "/profile",
+      path: "/user/profile",
     },
     {
-      title: "Account Setting",
-      path: "/account-setting",
+      title: "Update Information",
+      path: "/user/update-information",
     },
     {
       title: "Database Setting",
-      path: "/database-setting",
+      path: "/user/database-setting",
     },
     {
       title: "Help",
-      path: "/help",
+      path: "/user/help",
     },
   ];
 
   return (
     <>
       <Box
-        className="d-flex flex-column bg-light me-3 rounded overflow-auto mt-3"
-        sx={{ height: "90vh", position: "sticky", top: "5rem", zIndex: 6 }}
+        className="d-flex flex-column bg-light me-3 rounded overflow-auto"
+        sx={{
+          height: "80vh",
+          position: "sticky",
+          top: "6rem",
+          zIndex: 6,
+          mt: "2rem",
+        }}
       >
         <Box className="px-3 py-3">
           <Typography variant="p" color="black">
-            Account preferences
+            Account Preferences
           </Typography>
         </Box>
         <Divider />
         <Box>
-          {Links.map(({ click, title, path }, i) => (
-            <Link to={path} className="text-decoration-none text-dark" key={i}>
+          {Links.map(({ title, path }, index) => (
+            <Link
+              to={path}
+              className="text-decoration-none text-dark"
+              key={index}
+            >
               <ListItem
                 button
-                onClick={click}
                 sx={{
                   bgcolor: location.pathname === path ? grey[300] : "white",
                 }}

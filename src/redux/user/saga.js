@@ -4,6 +4,7 @@ import {
   signup as signupAction,
   signin as signinAction,
   getUser as getUserAction,
+  uploadProfile as uploadProfileAction,
 } from "./actions";
 import slice from "./slice";
 import siteSlice from "../site/slice";
@@ -53,8 +54,24 @@ export function* getUser() {
   }
 }
 
+export function* profile(action) {
+  try {
+    yield put(siteSlice.actions.setLoading(true));
+    const {
+      data: { data },
+    } = yield call(axios.post, `${baseUrl}/profile`, action.payload);
+    console.log("data===============", data)
+
+    yield put(slice.actions.setUserData(data));
+    yield put(siteSlice.actions.setLoading(false));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export default function* users() {
   yield takeLatest(signupAction.type, signup);
   yield takeLatest(signinAction.type, signin);
   yield takeLatest(getUserAction.type, getUser);
+  yield takeLatest(uploadProfileAction.type, profile);
 }

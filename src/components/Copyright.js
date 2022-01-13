@@ -9,14 +9,13 @@ const Copyright = (props) => {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      Copyright ©{" "}
       <Link color="inherit" href="https://backendeasy.com" target="_blank">
         BackendEasy
       </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      {new Date().getFullYear()}.
     </Typography>
   );
-}
+};
 
 export default Copyright;

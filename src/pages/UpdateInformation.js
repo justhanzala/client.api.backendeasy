@@ -14,6 +14,7 @@ import {
   TextField,
   MenuItem,
   CardMedia,
+  Button,
 } from "@mui/material";
 import {
   KeyboardBackspace as KeyboardBackspaceIcon,
@@ -33,21 +34,22 @@ import Banner from "../components/Banner";
 import AccountPreferences from "../components/AccountPreferences";
 
 const UpdateInformation = () => {
-  const dispatch = useDispatch();
+  const {
+    user: { userData },
+  } = useSelector((state) => state);
+
   const [expandedEditAccordion, setExpandedEditAccordion] = useState(true);
   const [expendedChangePasswordAccordion, setExpendedChangePasswordAccordion] =
     useState(false);
+  const [updatedImage, setUpdatedImage] = useState(null);
   const [editedData, seteditedData] = useState({
     name: "",
     role: "",
     emailAddress: "",
     phoneNumber: "",
   });
-  const [updatedImage, setUpdatedImage] = useState(null);
-  const {
-    user: { userData },
-  } = useSelector((state) => state);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     if (updatedImage !== null) {
       const formData = new FormData();
@@ -85,6 +87,10 @@ const UpdateInformation = () => {
       ...editedData,
       [name]: value,
     });
+  };
+
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
   };
 
   // Banner elements for pass to the props
@@ -139,7 +145,7 @@ const UpdateInformation = () => {
                 </>
               )}
             </Box>
-            <input
+            <TextField
               id="update-profile"
               type="file"
               className="d-none"
@@ -158,11 +164,11 @@ const UpdateInformation = () => {
                   <Box className="d-flex flex-column">
                     <Box className="mb-2">
                       <Typography variant="h6" color="black">
-                        Name, email, Phone Number
+                        Name, Email, Phone Number
                       </Typography>
                     </Box>
                     <Typography variant="p" color="GrayText">
-                      Change Your Profile Details
+                      Change Your Profile Information
                     </Typography>
                   </Box>
                   <IconButton color="inherit">
@@ -171,78 +177,83 @@ const UpdateInformation = () => {
                   </IconButton>
                 </Box>
               </AccordionSummary>
-              <hr className="text-dark mt-0" />
+              <Divider className="mb-3" />
               <AccordionDetails>
-                <Box className="mb-4 d-flex">
-                  <TextField
-                    type="text"
-                    name="name"
-                    variant="outlined"
-                    defaultValue={userData.name}
-                    onChange={handleOnChange}
-                    label="Name"
-                    className="me-3"
-                    required
-                    fullWidth
-                  />
-                  <TextField
-                    select
-                    label="Role"
-                    name="role"
-                    onChange={handleOnChange}
-                    variant="outlined"
-                    defaultValue={userData.role || ""}
-                    fullWidth
-                    required
-                  >
-                    {[
-                      {
-                        id: 1,
-                        value: "individual",
-                        placeholder: "Individual",
-                      },
-                      {
-                        id: 2,
-                        value: "company",
-                        placeholder: "Company",
-                      },
-                      {
-                        id: 3,
-                        value: "other",
-                        placeholder: "Other",
-                      },
-                    ].map((role) => (
-                      <MenuItem key={role.id} value={role.value}>
-                        {role.placeholder}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
-                <Box className="mb-4">
-                  <TextField
-                    type="email"
-                    name="emailAddress"
-                    variant="outlined"
-                    defaultValue={userData.email}
-                    onChange={handleOnChange}
-                    label="Email Address"
-                    className="me-3"
-                    required
-                    fullWidth
-                  />
-                </Box>
-                <Box className="mb-4">
-                  <TextField
-                    type="number"
-                    name="phoneNumber"
-                    variant="outlined"
-                    defaultValue={userData.phoneNumber}
-                    onChange={handleOnChange}
-                    label="Phone Number"
-                    className="me-3"
-                    required
-                    fullWidth
-                  />
+                <Box component="form" onSubmit={handleUpdateUser}>
+                  <Box className="mb-4 d-flex">
+                    <TextField
+                      type="text"
+                      name="name"
+                      variant="outlined"
+                      defaultValue={userData.name || ""}
+                      onChange={handleOnChange}
+                      label="Name"
+                      className="me-3"
+                      required
+                      fullWidth
+                    />
+                    <TextField
+                      select
+                      label="Role"
+                      name="role"
+                      onChange={handleOnChange}
+                      variant="outlined"
+                      defaultValue={userData.role || ""}
+                      fullWidth
+                      required
+                    >
+                      {[
+                        {
+                          id: 1,
+                          value: "individual",
+                          placeholder: "Individual",
+                        },
+                        {
+                          id: 2,
+                          value: "company",
+                          placeholder: "Company",
+                        },
+                        {
+                          id: 3,
+                          value: "other",
+                          placeholder: "Other",
+                        },
+                      ].map((role) => (
+                        <MenuItem key={role.id} value={role.value}>
+                          {role.placeholder}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Box>
+                  <Box className="mb-4">
+                    <TextField
+                      type="email"
+                      name="emailAddress"
+                      variant="outlined"
+                      defaultValue={userData.email || ""}
+                      onChange={handleOnChange}
+                      label="Email Address"
+                      className="me-3"
+                      required
+                      fullWidth
+                    />
+                  </Box>
+                  <Box className="mb-4">
+                    <TextField
+                      type="number"
+                      name="phoneNumber"
+                      variant="outlined"
+                      defaultValue={userData.phoneNumber || ""}
+                      onChange={handleOnChange}
+                      label="Phone Number"
+                      className="me-3"
+                      required
+                      fullWidth
+                    />
+                  </Box>
+                  <Button type="submit" variant="contained" color="primary">
+                    Submit
+                  </Button>
                 </Box>
               </AccordionDetails>
             </Accordion>
@@ -278,7 +289,7 @@ const UpdateInformation = () => {
                   </IconButton>
                 </Box>
               </AccordionSummary>
-              <hr className="text-dark mt-0" />
+              <Divider className="mb-3" />
               <AccordionDetails>
                 <Box className="mb-4">
                   <TextField

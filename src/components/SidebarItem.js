@@ -24,7 +24,7 @@ const SidebarItem = () => {
       icon: <ApiIcon />,
       title: "API Services",
       path: "/api-services",
-      click: () => history.push("/api-services"),
+      click: () => history.push("/api-services"), 
     },
   ];
 

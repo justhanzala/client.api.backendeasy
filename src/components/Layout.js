@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 // Styled Components
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
@@ -88,7 +88,6 @@ const DashboardContent = ({ children, routes }) => {
   } = useSelector((state) => state);
 
   const location = useLocation();
-  const history = useHistory();
   const { pathname } = location;
   const { title } =
     routes.find((route) => route.path === location.pathname) || {};
@@ -254,31 +253,39 @@ const DashboardContent = ({ children, routes }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={() => history.push("/user/profile")}>
-          {userData?.profile ? (
-            <>
-              <Box sx={{ width: "45px", height: "45px" }} className="me-2">
-                <CardMedia
-                  component="img"
-                  className="rounded-pill w-100 h-100 position-relative"
-                  image={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
-                />
-              </Box>
-              {userData.name}
-            </>
-          ) : (
-            <>
-              <AccountBoxIcon className="fs-1 me-2 text-dark" /> {userData.name}
-            </>
-          )}
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <SettingsIcon fontSize="small" />
-          </ListItemIcon>
-          Account Preferences
-        </MenuItem>
+        <Link to="/user/profile" className="text-dark text-decoration-none">
+          <MenuItem>
+            {userData?.profile ? (
+              <>
+                <Box sx={{ width: "45px", height: "45px" }} className="me-2">
+                  <CardMedia
+                    component="img"
+                    className="rounded-pill w-100 h-100 position-relative"
+                    image={`${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/${userData?.profile}`}
+                  />
+                </Box>
+                {userData.name}
+              </>
+            ) : (
+              <>
+                <AccountBoxIcon className="fs-1 me-2 text-dark" />{" "}
+                {userData.name}
+              </>
+            )}
+          </MenuItem>
+        </Link>
+        <Divider className="my-2" />
+        <Link
+          to="/user/update-information"
+          className="text-dark text-decoration-none"
+        >
+          <MenuItem>
+            <ListItemIcon>
+              <SettingsIcon fontSize="small" />
+            </ListItemIcon>
+            Account Preferences
+          </MenuItem>
+        </Link>
         <MenuItem onClick={LogoutAction}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
